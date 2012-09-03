@@ -4,6 +4,8 @@
  */
 package com.ecwid.mailchimp.method;
 
+import com.ecwid.mailchimp.annotation.MailChimpField;
+
 /**
  * Abstract class representing MailChimp API call.
  *
@@ -13,6 +15,12 @@ package com.ecwid.mailchimp.method;
  */
 public abstract class MailChimpMethod<R> extends MailChimpObject {
 
+	/**
+	 * API key to access MailChimp service.
+	 */
+	@MailChimpField
+	public String apikey;
+	
 	/**
 	 * Get MailChimp API method name.
 	 * By default returns the simple class name with the first letter lowercased.

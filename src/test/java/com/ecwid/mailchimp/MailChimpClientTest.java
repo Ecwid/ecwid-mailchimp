@@ -60,7 +60,7 @@ public class MailChimpClientTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		client = new MailChimpClient(API_KEY);
+		client = new MailChimpClient();
 		listUnsubscribeBatch(0, MAX, true); // clear everything
 	}
 	
@@ -102,6 +102,7 @@ public class MailChimpClientTest {
 	@Test
 	public void testExecute_ListSubscribe() throws Exception {
 		ListSubscribe listSubscribe = new ListSubscribe();
+		listSubscribe.apikey = API_KEY;
 		listSubscribe.id = LIST_ID;
 		listSubscribe.email_address = email(0);
 		listSubscribe.double_optin = false;
@@ -130,6 +131,7 @@ public class MailChimpClientTest {
 		assertEquals("Pupkin", listMemberInfo.data.get(0).merges.get("LNAME"));
 		
 		ListUnsubscribe listUnsubscribe = new ListUnsubscribe();
+		listUnsubscribe.apikey = API_KEY;
 		listUnsubscribe.id = LIST_ID;
 		listUnsubscribe.email_address = email(0);
 		listUnsubscribe.delete_member = false;
@@ -155,6 +157,7 @@ public class MailChimpClientTest {
 	
 	private ListBatchUnsubscribeResult listUnsubscribeBatch(int from, int count, boolean delete_member) throws Exception {
 		ListBatchUnsubscribe request = new ListBatchUnsubscribe();
+		request.apikey = API_KEY;
 		request.id = LIST_ID;
 		request.emails = emails(from, count);
 		request.delete_member = delete_member;
@@ -166,6 +169,7 @@ public class MailChimpClientTest {
 	
 	private ListBatchSubscribeResult listSubscribeBatch(int from, int count, boolean double_optin, boolean update_existing) throws Exception {
 		ListBatchSubscribe request = new ListBatchSubscribe();
+		request.apikey = API_KEY;
 		request.id = LIST_ID;
 		request.batch = new ArrayList<MergeVars>();
 		request.double_optin = double_optin;
@@ -186,6 +190,7 @@ public class MailChimpClientTest {
 	
 	private ListMemberInfoResult listMemberInfo(int from, int count) throws Exception {
 		ListMemberInfo request = new ListMemberInfo();
+		request.apikey = API_KEY;
 		request.id = LIST_ID;
 		request.email_address = emails(from, count);
 		ListMemberInfoResult result = client.execute(request);
@@ -195,6 +200,7 @@ public class MailChimpClientTest {
 	
 	private ListMembersResult listMembers(MemberStatus status) throws Exception {
 		ListMembers request = new ListMembers();
+		request.apikey = API_KEY;
 		request.id = LIST_ID;
 		request.status = status;
 		ListMembersResult result = client.execute(request);
