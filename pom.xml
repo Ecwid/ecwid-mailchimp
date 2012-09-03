@@ -9,8 +9,8 @@
 	<packaging>jar</packaging>
 
 	<name>MailChimp API Wrapper</name>
-    <description>MailChimp API Wrapper for Java</description>
-    <url>https://github.com/Ecwid/ecwid-mailchimp</url>
+	<description>MailChimp API Wrapper for Java</description>
+	<url>https://github.com/Ecwid/ecwid-mailchimp</url>
 	<inceptionYear>2012</inceptionYear>
 
 	<licenses>
@@ -21,18 +21,18 @@
 		</license>
 	</licenses>
 
-    <scm>
-        <url>https://github.com/Ecwid/ecwid-mailchimp/</url>
-        <connection>scm:git:https://github.com/Ecwid/ecwid-mailchimp.git</connection>
-        <developerConnection>scm:git:https://github.com/Ecwid/ecwid-mailchimp.git</developerConnection>
-    </scm>
+	<scm>
+		<url>https://github.com/Ecwid/ecwid-mailchimp/</url>
+		<connection>scm:git:https://github.com/Ecwid/ecwid-mailchimp.git</connection>
+		<developerConnection>scm:git:https://github.com/Ecwid/ecwid-mailchimp.git</developerConnection>
+	</scm>
 
-    <developers>
-        <developer>
-            <name>Vasily Karyaev</name>
-            <email>v.karyaev@gmail.com</email>
-        </developer>
-    </developers>
+	<developers>
+		<developer>
+			<name>Vasily Karyaev</name>
+			<email>v.karyaev@gmail.com</email>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
