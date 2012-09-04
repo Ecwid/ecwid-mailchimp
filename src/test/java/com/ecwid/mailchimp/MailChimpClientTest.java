@@ -15,6 +15,7 @@ import com.ecwid.mailchimp.method.ListMembers;
 import com.ecwid.mailchimp.method.ListMembersResult;
 import com.ecwid.mailchimp.method.ListSubscribe;
 import com.ecwid.mailchimp.method.ListUnsubscribe;
+import com.ecwid.mailchimp.method.ListUpdateMember;
 import com.ecwid.mailchimp.method.MergeVars;
 import com.ecwid.mailchimp.method.MemberStatus;
 import java.util.ArrayList;
@@ -78,29 +79,29 @@ public class MailChimpClientTest {
 	}
 	
 	@Test
-	public void testExecute_ListBatchSubscribe() throws Exception {
-		ListBatchSubscribeResult batchSubscribe = listSubscribeBatch(4, 5, false, false);
-		assertEquals(5, (int) batchSubscribe.add_count);
-		assertEquals(0, (int) batchSubscribe.update_count);
-		assertEquals(0, (int) batchSubscribe.error_count);
+	public void testExecute_ListBatch() throws Exception {
+		ListBatchSubscribeResult batchSubscribeResult = listSubscribeBatch(4, 5, false, false);
+		assertEquals(5, (int) batchSubscribeResult.add_count);
+		assertEquals(0, (int) batchSubscribeResult.update_count);
+		assertEquals(0, (int) batchSubscribeResult.error_count);
 		
-		ListMemberInfoResult memberInfo = listMemberInfo(3, 5);
-		assertEquals(4, (int) memberInfo.success);
-		assertEquals(1, (int) memberInfo.errors);
+		ListMemberInfoResult memberInfoResult = listMemberInfo(3, 5);
+		assertEquals(4, (int) memberInfoResult.success);
+		assertEquals(1, (int) memberInfoResult.errors);
 		
-		ListBatchUnsubscribeResult batchUnsubscribe = listUnsubscribeBatch(4, 2, false);
-		assertEquals(2, (int) batchUnsubscribe.success_count);
-		assertEquals(0, (int) batchUnsubscribe.error_count);
+		ListBatchUnsubscribeResult batchUnsubscribeResult = listUnsubscribeBatch(4, 2, false);
+		assertEquals(2, (int) batchUnsubscribeResult.success_count);
+		assertEquals(0, (int) batchUnsubscribeResult.error_count);
 		
-		ListMembersResult members = listMembers(MemberStatus.subscribed);
-		assertEquals(3, (int) members.total);
+		ListMembersResult membersResult = listMembers(MemberStatus.subscribed);
+		assertEquals(3, (int) membersResult.total);
 		
-		members = listMembers(MemberStatus.unsubscribed);
-		assertEquals(2, (int) members.total);
+		membersResult = listMembers(MemberStatus.unsubscribed);
+		assertEquals(2, (int) membersResult.total);
 	}
 	
 	@Test
-	public void testExecute_ListSubscribe() throws Exception {
+	public void testExecute_ListSingle() throws Exception {
 		ListSubscribe listSubscribe = new ListSubscribe();
 		listSubscribe.apikey = API_KEY;
 		listSubscribe.id = LIST_ID;
@@ -124,11 +125,20 @@ public class MailChimpClientTest {
 			assertEquals(214, e.code);
 		}
 		
-		ListMemberInfoResult listMemberInfo = listMemberInfo(0, 1);
-		assertEquals(email(0), listMemberInfo.data.get(0).email);
-		assertEquals(MemberStatus.subscribed, listMemberInfo.data.get(0).status);
-		assertEquals("Vasya", listMemberInfo.data.get(0).merges.get("FNAME"));
-		assertEquals("Pupkin", listMemberInfo.data.get(0).merges.get("LNAME"));
+		ListMemberInfoResult listMemberInfoResult = listMemberInfo(0, 1);
+		assertEquals(email(0), listMemberInfoResult.data.get(0).email);
+		assertEquals(MemberStatus.subscribed, listMemberInfoResult.data.get(0).status);
+		assertEquals("Vasya", listMemberInfoResult.data.get(0).merges.get("FNAME"));
+		assertEquals("Pupkin", listMemberInfoResult.data.get(0).merges.get("LNAME"));
+		
+		ListUpdateMember listUpdateMember = new ListUpdateMember();
+		listUpdateMember.apikey = API_KEY;
+		listUpdateMember.id = LIST_ID;
+		listUpdateMember.email_address = email(0);
+		mv = new MyMergeVars();
+		mv.LNAME = "Popkin";
+		listUpdateMember.merge_vars = mv;
+		assertTrue(client.execute(listUpdateMember));
 		
 		ListUnsubscribe listUnsubscribe = new ListUnsubscribe();
 		listUnsubscribe.apikey = API_KEY;
@@ -137,12 +147,12 @@ public class MailChimpClientTest {
 		listUnsubscribe.delete_member = false;
 		assertTrue(client.execute(listUnsubscribe));
 		
-		listMemberInfo = listMemberInfo(0, 1);
-		assertEquals(email(0), listMemberInfo.data.get(0).email);
-		assertEquals(MemberStatus.unsubscribed, listMemberInfo.data.get(0).status);
-		assertEquals("Vasya", listMemberInfo.data.get(0).merges.get("FNAME"));
-		assertEquals("Pupkin", listMemberInfo.data.get(0).merges.get("LNAME"));
-		
+		listMemberInfoResult = listMemberInfo(0, 1);
+		assertEquals(email(0), listMemberInfoResult.data.get(0).email);
+		assertEquals(MemberStatus.unsubscribed, listMemberInfoResult.data.get(0).status);
+		assertEquals("Vasya", listMemberInfoResult.data.get(0).merges.get("FNAME"));
+		assertEquals("Popkin", listMemberInfoResult.data.get(0).merges.get("LNAME"));
+	
 		listUnsubscribe.delete_member = true;
 		assertTrue(client.execute(listUnsubscribe));
 		
