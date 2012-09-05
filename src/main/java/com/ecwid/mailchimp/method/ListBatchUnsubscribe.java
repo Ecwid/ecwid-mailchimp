@@ -12,8 +12,11 @@ import java.util.List;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchUnsubscribe extends AbstractListMethod<ListBatchUnsubscribeResult> {
+public class ListBatchUnsubscribe extends MailChimpMethod<ListBatchUnsubscribeResult> {
 
+	@MailChimpField
+	public String id;
+	
 	@MailChimpField
 	public List<String> emails;
 	

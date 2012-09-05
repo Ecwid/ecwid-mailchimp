@@ -12,8 +12,11 @@ import java.util.List;
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListMemberInfo extends AbstractListMethod<ListMemberInfoResult> {
+public class ListMemberInfo extends MailChimpMethod<ListMemberInfoResult> {
 
+	@MailChimpField
+	public String id;
+	
 	@MailChimpField
 	public List<String> email_address;
 

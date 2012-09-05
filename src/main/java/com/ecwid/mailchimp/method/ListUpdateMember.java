@@ -11,8 +11,11 @@ import com.ecwid.mailchimp.annotation.MailChimpField;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListUpdateMember extends AbstractListMethod<Boolean> {
+public class ListUpdateMember extends MailChimpMethod<Boolean> {
 
+	@MailChimpField
+	public String id;
+	
 	@MailChimpField
 	public String email_address;
 	

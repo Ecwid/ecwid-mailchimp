@@ -12,8 +12,11 @@ import java.util.List;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchSubscribe extends AbstractListMethod<ListBatchSubscribeResult> {
+public class ListBatchSubscribe extends MailChimpMethod<ListBatchSubscribeResult> {
 
+	@MailChimpField
+	public String id;
+	
 	@MailChimpField
 	public List<MergeVars> batch;
 	

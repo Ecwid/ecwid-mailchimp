@@ -11,8 +11,11 @@ import com.ecwid.mailchimp.annotation.MailChimpField;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListUnsubscribe extends AbstractListMethod<Boolean> {
+public class ListUnsubscribe extends MailChimpMethod<Boolean> {
 
+	@MailChimpField
+	public String id;
+	
 	@MailChimpField
 	public String email_address;
 	
