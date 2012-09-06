@@ -192,17 +192,18 @@ public class MailChimpClientTest {
 		ListBatchSubscribe request = new ListBatchSubscribe();
 		request.apikey = API_KEY;
 		request.id = LIST_ID;
-		request.batch = new ArrayList<MergeVars>();
 		request.double_optin = double_optin;
 		request.update_existing = update_existing;
 		
+		List<MyMergeVars> batch = new ArrayList<MyMergeVars>();
 		for(int i=from; i<from+count; i++) {
 			MyMergeVars mv = new MyMergeVars();
 			mv.EMAIL = email(i);
 			mv.FNAME = "Batch"+i;
 			mv.LNAME = "Subscribed"+i;
-			request.batch.add(mv);
+			batch.add(mv);
 		}
+		request.batch = batch;
 		
 		ListBatchSubscribeResult result = client.execute(request);
 		log.info("Result: " + result);

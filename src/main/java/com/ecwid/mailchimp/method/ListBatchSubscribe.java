@@ -29,7 +29,7 @@ public class ListBatchSubscribe extends MailChimpMethod<ListBatchSubscribeResult
 	public String id;
 	
 	@MailChimpField
-	public List<MergeVars> batch;
+	public List<? extends MergeVars> batch;
 	
 	@MailChimpField
 	public Boolean double_optin;
