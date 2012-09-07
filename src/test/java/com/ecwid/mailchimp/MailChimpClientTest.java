@@ -15,7 +15,6 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
 import com.ecwid.mailchimp.method.ListBatchSubscribe;
 import com.ecwid.mailchimp.method.ListBatchSubscribeResult;
 import com.ecwid.mailchimp.method.ListBatchUnsubscribe;
@@ -27,10 +26,11 @@ import com.ecwid.mailchimp.method.ListMembersResult;
 import com.ecwid.mailchimp.method.ListSubscribe;
 import com.ecwid.mailchimp.method.ListUnsubscribe;
 import com.ecwid.mailchimp.method.ListUpdateMember;
-import com.ecwid.mailchimp.method.MergeVars;
 import com.ecwid.mailchimp.method.MemberStatus;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -81,14 +81,6 @@ public class MailChimpClientTest {
 		client.close();
 	}
 	
-	class MyMergeVars extends MergeVars {
-		@MailChimpField
-		public String FNAME;
-
-		@MailChimpField
-		public String LNAME;
-	}
-	
 	@Test
 	public void testExecute_ListBatch() throws Exception {
 		ListBatchSubscribeResult batchSubscribeResult = listSubscribeBatch(4, 5, false, false);
@@ -119,12 +111,9 @@ public class MailChimpClientTest {
 		listSubscribe.email_address = email(0);
 		listSubscribe.double_optin = false;
 		listSubscribe.update_existing = false;
-		
-		MyMergeVars mv = new MyMergeVars();
-		listSubscribe.merge_vars = mv;
-		mv.FNAME = "Vasya";
-		mv.LNAME = "Pupkin";
-		listSubscribe.merge_vars = mv;
+		listSubscribe.merge_vars = new HashMap<String, Object>();
+		listSubscribe.merge_vars.put("FNAME", "Vasya");
+		listSubscribe.merge_vars.put("LNAME", "Pupkin");
 		
 		assertTrue(client.execute(listSubscribe));
 		
@@ -146,9 +135,8 @@ public class MailChimpClientTest {
 		listUpdateMember.apikey = API_KEY;
 		listUpdateMember.id = LIST_ID;
 		listUpdateMember.email_address = email(0);
-		mv = new MyMergeVars();
-		mv.LNAME = "Popkin";
-		listUpdateMember.merge_vars = mv;
+		listUpdateMember.merge_vars = new HashMap<String, Object>();
+		listUpdateMember.merge_vars.put("LNAME", "Popkin");
 		assertTrue(client.execute(listUpdateMember));
 		
 		ListUnsubscribe listUnsubscribe = new ListUnsubscribe();
@@ -195,12 +183,12 @@ public class MailChimpClientTest {
 		request.double_optin = double_optin;
 		request.update_existing = update_existing;
 		
-		List<MyMergeVars> batch = new ArrayList<MyMergeVars>();
+		List<Map<String, Object>> batch = new ArrayList<Map<String, Object>>();
 		for(int i=from; i<from+count; i++) {
-			MyMergeVars mv = new MyMergeVars();
-			mv.EMAIL = email(i);
-			mv.FNAME = "Batch"+i;
-			mv.LNAME = "Subscribed"+i;
+			Map<String,Object> mv = new HashMap<String,Object>();
+			mv.put("EMAIL", email(i));
+			mv.put("FNAME", "Batch"+i);
+			mv.put("LNAME", "Subscribed"+i);
 			batch.add(mv);
 		}
 		request.batch = batch;

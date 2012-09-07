@@ -16,6 +16,7 @@
 package com.ecwid.mailchimp.method;
 
 import com.ecwid.mailchimp.annotation.MailChimpField;
+import java.util.Map;
 
 /**
  * See http://apidocs.mailchimp.com/api/1.3/listupdatemember.func.php
@@ -31,7 +32,7 @@ public class ListUpdateMember extends MailChimpMethod<Boolean> {
 	public String email_address;
 	
 	@MailChimpField
-	public MergeVars merge_vars;
+	public Map<String, Object> merge_vars;
 	
 	@MailChimpField
 	public EmailType email_type;

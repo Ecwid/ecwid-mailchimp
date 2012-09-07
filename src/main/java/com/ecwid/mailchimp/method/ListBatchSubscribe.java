@@ -17,6 +17,7 @@ package com.ecwid.mailchimp.method;
 
 import com.ecwid.mailchimp.annotation.MailChimpField;
 import java.util.List;
+import java.util.Map;
 
 /**
  * See http://apidocs.mailchimp.com/api/1.3/listbatchsubscribe.func.php
@@ -29,7 +30,7 @@ public class ListBatchSubscribe extends MailChimpMethod<ListBatchSubscribeResult
 	public String id;
 	
 	@MailChimpField
-	public List<? extends MergeVars> batch;
+	public List<Map<String, Object>> batch;
 	
 	@MailChimpField
 	public Boolean double_optin;
@@ -39,7 +40,7 @@ public class ListBatchSubscribe extends MailChimpMethod<ListBatchSubscribeResult
 	
 	@MailChimpField
 	public Boolean replace_interests;
-
+	
 	@Override
 	public Class<ListBatchSubscribeResult> getResultType() {
 		return ListBatchSubscribeResult.class;
