@@ -30,7 +30,7 @@ public class ListBatchSubscribe extends MailChimpMethod<ListBatchSubscribeResult
 	public String id;
 	
 	@MailChimpField
-	public List<Map<String, Object>> batch;
+	public List<? extends Map<String, Object>> batch;
 	
 	@MailChimpField
 	public Boolean double_optin;
