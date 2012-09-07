@@ -23,11 +23,8 @@ import java.util.Date;
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListMembers extends MailChimpMethod<ListMembersResult> {
+public class ListMembers extends HasListIdMethod<ListMembersResult> {
 
-	@MailChimpField
-	public String id;
-	
 	@MailChimpField
 	public MemberStatus status;
 	

@@ -24,11 +24,8 @@ import java.util.Map;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchSubscribe extends MailChimpMethod<ListBatchSubscribeResult> {
+public class ListBatchSubscribe extends HasListIdMethod<ListBatchSubscribeResult> {
 
-	@MailChimpField
-	public String id;
-	
 	@MailChimpField
 	public List<? extends Map<String, Object>> batch;
 	

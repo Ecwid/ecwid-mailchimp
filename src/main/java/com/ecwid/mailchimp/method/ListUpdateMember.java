@@ -23,11 +23,8 @@ import java.util.Map;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListUpdateMember extends MailChimpMethod<Boolean> {
+public class ListUpdateMember extends HasListIdMethod<Boolean> {
 
-	@MailChimpField
-	public String id;
-	
 	@MailChimpField
 	public String email_address;
 	
