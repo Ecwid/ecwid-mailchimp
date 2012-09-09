@@ -16,6 +16,7 @@
 package com.ecwid.mailchimp.method;
 
 import com.ecwid.mailchimp.MailChimpGsonFactory;
+import com.ecwid.mailchimp.annotation.MailChimpField;
 
 
 /**
@@ -29,6 +30,12 @@ public abstract class MailChimpObject {
 		return getClass().getSimpleName()+":"+toJson();
 	}
 	
+	/**
+	 * Compares this object to <code>obj</code>, taking into account all fields marked with the {@link MailChimpField} annotation.
+	 * All other fields are ignored.
+	 * <p>
+	 * If <code>obj</code> is not an instance of the same class, the result is <code>false</code>.
+	 */
 	@Override
 	public final boolean equals(Object obj) {
 		if (obj == null) {
@@ -40,6 +47,10 @@ public abstract class MailChimpObject {
 		return this.toJson().equals(((MailChimpObject) obj).toJson());
 	}
 	
+	/**
+	 * Calculates hashCode based on all fields marked with the {@link MailChimpField} annotation.
+	 * All other fields are ignored.
+	 */
 	@Override
 	public final int hashCode() {
 		return toJson().hashCode();
