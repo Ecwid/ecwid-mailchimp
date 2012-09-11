@@ -15,7 +15,7 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 
 /**
  *
@@ -23,12 +23,12 @@ import com.ecwid.mailchimp.annotation.MailChimpField;
  */
 public class ListBatchError extends MailChimpObject {
 	
-	@MailChimpField
+	@APIMethodParam
 	public String email;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Integer code;
 	
-	@MailChimpField
+	@APIMethodParam
 	public String message;
 }

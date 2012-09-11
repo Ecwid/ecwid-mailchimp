@@ -13,34 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.annotation;
 
-import com.ecwid.mailchimp.annotation.APIMethod;
-import com.ecwid.mailchimp.annotation.APIMethodParam;
-import java.util.Map;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listupdatemember.func.php
+ * This annotation marks fields to be serialized/deserialed by the MailChimp API wrapper.
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@APIMethod
-public class ListUpdateMember extends HasListIdMethod<Boolean> {
-
-	@APIMethodParam
-	public String email_address;
-	
-	@APIMethodParam
-	public Map<String, Object> merge_vars;
-	
-	@APIMethodParam
-	public EmailType email_type;
-	
-	@APIMethodParam
-	public Boolean replace_interests;
-	
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
+@Documented
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = ElementType.FIELD)
+public @interface APIMethodParam {
+	public String name() default "";
 }

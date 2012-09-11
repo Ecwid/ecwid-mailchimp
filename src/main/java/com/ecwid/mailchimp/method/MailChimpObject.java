@@ -16,7 +16,6 @@
 package com.ecwid.mailchimp.method;
 
 import com.ecwid.mailchimp.MailChimpGsonFactory;
-import com.ecwid.mailchimp.annotation.MailChimpField;
 
 
 /**

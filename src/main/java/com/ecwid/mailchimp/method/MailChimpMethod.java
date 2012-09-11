@@ -15,7 +15,9 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethod;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
+import java.lang.annotation.Annotation;
 
 /**
  * Abstract class representing MailChimp API call.
@@ -29,18 +31,32 @@ public abstract class MailChimpMethod<R> extends MailChimpObject {
 	/**
 	 * API key to access MailChimp service.
 	 */
-	@MailChimpField
+	@APIMethodParam
 	public String apikey;
 	
 	/**
 	 * Get MailChimp API method name.
-	 * By default returns the simple class name with the first letter lowercased.
+	 * See {@link APIMethod} for details.
+	 *
+	 * @throws IllegalArgumentException if neither this class nor any of its superclasses
+	 * are annotated with {@link APIMethod}.
 	 */
-	public String getMethodName() {
-		String name = getClass().getSimpleName();
-		String head = name.substring(0, 1).toLowerCase();
-		String tail = name.substring(1);
-		return head + tail;
+	public final String getMethodName() {
+		for(Class<?> c=getClass(); c != null; c=c.getSuperclass()) {
+			APIMethod a = c.getAnnotation(APIMethod.class);
+			if(a != null) {
+				String name = a.name();
+				if(name.isEmpty()) {
+					name = c.getSimpleName();
+					String head = name.substring(0, 1).toLowerCase();
+					String tail = name.substring(1);
+					name = head + tail;
+				}
+				return name;
+			}
+		}
+
+		throw new IllegalArgumentException("Neither "+getClass()+" nor its superclasses are annotated with "+APIMethod.class);
 	}
 
 	/**

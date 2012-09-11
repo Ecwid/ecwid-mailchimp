@@ -15,7 +15,8 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethod;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.List;
 import java.util.Map;
 
@@ -24,18 +25,19 @@ import java.util.Map;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
+@APIMethod
 public class ListBatchSubscribe extends HasListIdMethod<ListBatchSubscribeResult> {
 
-	@MailChimpField
+	@APIMethodParam
 	public List<? extends Map<String, Object>> batch;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean double_optin;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean update_existing;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean replace_interests;
 	
 	@Override

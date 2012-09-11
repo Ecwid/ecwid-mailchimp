@@ -15,7 +15,8 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethod;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.List;
 
 /**
@@ -23,18 +24,19 @@ import java.util.List;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
+@APIMethod
 public class ListBatchUnsubscribe extends HasListIdMethod<ListBatchUnsubscribeResult> {
 
-	@MailChimpField
+	@APIMethodParam
 	public List<String> emails;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean delete_member;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean send_goodbye;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean send_notify;
 
 	@Override

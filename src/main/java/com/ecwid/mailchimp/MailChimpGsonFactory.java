@@ -15,7 +15,7 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.FieldNamingStrategy;
@@ -48,7 +48,7 @@ public class MailChimpGsonFactory {
 	private static final ExclusionStrategy exclusionStrategy = new ExclusionStrategy() {
 		@Override
 		public boolean shouldSkipField(FieldAttributes fa) {
-			return fa.getAnnotation(MailChimpField.class) == null;
+			return fa.getAnnotation(APIMethodParam.class) == null;
 		}
 
 		@Override
@@ -60,7 +60,7 @@ public class MailChimpGsonFactory {
 	private static FieldNamingStrategy fieldNamingStrategy = new FieldNamingStrategy() {
 		@Override
 		public String translateName(Field field) {
-			String name = field.getAnnotation(MailChimpField.class).name();
+			String name = field.getAnnotation(APIMethodParam.class).name();
 			return name.isEmpty()? field.getName() : name;
 		}
 	};

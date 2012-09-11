@@ -15,7 +15,7 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.Date;
 import java.util.Map;
 
@@ -24,33 +24,33 @@ import java.util.Map;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class MemberInfo extends MailChimpObject {
-	@MailChimpField
+	@APIMethodParam
 	public String id;
 	
-	@MailChimpField
+	@APIMethodParam
 	public String email;
 	
-	@MailChimpField
+	@APIMethodParam
 	public EmailType email_type;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Map<String, String> merges;
 	
-	@MailChimpField
+	@APIMethodParam
 	public MemberStatus status;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Date timestamp;
 	
 	/**
 	 * This field indicates email, associated with {@link #error}.
 	 */
-	@MailChimpField
+	@APIMethodParam
 	public String email_address;
 
 	/**
 	 * Error message.
 	 */
-	@MailChimpField
+	@APIMethodParam
 	public String error;
 }

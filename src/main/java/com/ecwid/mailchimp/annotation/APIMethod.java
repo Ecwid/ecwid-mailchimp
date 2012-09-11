@@ -15,20 +15,29 @@
  */
 package com.ecwid.mailchimp.annotation;
 
+import com.ecwid.mailchimp.method.MailChimpMethod;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * This annotation marks fields to be serialized/deserialed by the API wrapper.
- * 
+ * This annotation marks subclasses of {@link MailChimpMethod}.
+ * It is used to find out the MailChimp API method name
+ * (see {@link MailChimpMethod#getMethodName()}).
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = ElementType.FIELD)
-public @interface MailChimpField {
+@Target(value = ElementType.TYPE)
+public @interface APIMethod {
+	/**
+	 * The name of MailChimp API method.
+	 * If not specified, the simple name of {@link MailChimpMethod}'s subclass will be used
+	 * (with the first letter lowercased).
+	 */
 	public String name() default "";
 }

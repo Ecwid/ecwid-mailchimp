@@ -15,7 +15,7 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.Date;
 
 /**
@@ -23,9 +23,9 @@ import java.util.Date;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class ShortMemberInfo extends MailChimpObject {
-	@MailChimpField
+	@APIMethodParam
 	public String email;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Date timestamp;
 }

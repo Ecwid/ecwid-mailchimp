@@ -15,7 +15,7 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.List;
 
 /**
@@ -23,12 +23,12 @@ import java.util.List;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class ListMemberInfoResult extends MailChimpObject {
-	@MailChimpField
+	@APIMethodParam
 	public Integer success;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Integer errors;
 	
-	@MailChimpField
+	@APIMethodParam
 	public List<MemberInfo> data;
 }

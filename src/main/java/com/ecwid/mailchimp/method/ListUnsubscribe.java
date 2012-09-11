@@ -15,25 +15,27 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethod;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 
 /**
  * See http://apidocs.mailchimp.com/api/1.3/listunsubscribe.func.php
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
+@APIMethod
 public class ListUnsubscribe extends HasListIdMethod<Boolean> {
 
-	@MailChimpField
+	@APIMethodParam
 	public String email_address;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean delete_member;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean send_goodbye;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean send_notify;
 	
 	@Override

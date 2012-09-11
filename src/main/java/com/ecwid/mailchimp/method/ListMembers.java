@@ -15,7 +15,8 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethod;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.Date;
 
 /**
@@ -23,18 +24,19 @@ import java.util.Date;
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
+@APIMethod
 public class ListMembers extends HasListIdMethod<ListMembersResult> {
 
-	@MailChimpField
+	@APIMethodParam
 	public MemberStatus status;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Date since;
 
-	@MailChimpField
+	@APIMethodParam
 	public Integer start;
 
-	@MailChimpField
+	@APIMethodParam
 	public Integer limit;
 	
 	@Override

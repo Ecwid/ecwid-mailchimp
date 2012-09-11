@@ -15,7 +15,8 @@
  */
 package com.ecwid.mailchimp.method;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.annotation.APIMethod;
+import com.ecwid.mailchimp.annotation.APIMethodParam;
 import java.util.Map;
 
 /**
@@ -23,27 +24,28 @@ import java.util.Map;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
+@APIMethod
 public class ListSubscribe extends HasListIdMethod<Boolean> {
 
-	@MailChimpField
+	@APIMethodParam
 	public String email_address;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Map<String, Object> merge_vars;
 	
-	@MailChimpField
+	@APIMethodParam
 	public EmailType email_type;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean double_optin;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean update_existing;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean replace_interests;
 	
-	@MailChimpField
+	@APIMethodParam
 	public Boolean send_welcome;
 	
 	@Override
