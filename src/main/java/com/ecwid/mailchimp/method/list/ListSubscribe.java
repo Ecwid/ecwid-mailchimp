@@ -13,44 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
+import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
-import java.util.Date;
+import com.ecwid.mailchimp.method.MailChimpObject;
 import java.util.Map;
 
 /**
+ * See http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php
+ * 
+ * @param M type of subscriber data (see {@link #merge_vars}). Must be specified in concrete subclasses.
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MemberInfo extends MailChimpObject {
+@APIMethod
+public abstract class ListSubscribe<M extends MailChimpObject> extends HasListIdMethod<Boolean> {
+
 	@APIMethodParam
-	public String id;
+	public String email_address;
 	
 	@APIMethodParam
-	public String email;
+	public M merge_vars;
 	
 	@APIMethodParam
 	public EmailType email_type;
 	
 	@APIMethodParam
-	public Map<String, String> merges;
+	public Boolean double_optin;
 	
 	@APIMethodParam
-	public MemberStatus status;
+	public Boolean update_existing;
 	
 	@APIMethodParam
-	public Date timestamp;
+	public Boolean replace_interests;
 	
-	/**
-	 * This field indicates email, associated with {@link #error}.
-	 */
 	@APIMethodParam
-	public String email_address;
-
-	/**
-	 * Error message.
-	 */
-	@APIMethodParam
-	public String error;
+	public Boolean send_welcome;
+	
+	@Override
+	public Class<Boolean> getResultType() {
+		return Boolean.class;
+	}
 }

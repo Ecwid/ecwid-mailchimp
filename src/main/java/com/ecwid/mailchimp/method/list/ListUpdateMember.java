@@ -13,34 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
 import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
-import java.util.List;
+import com.ecwid.mailchimp.method.MailChimpObject;
+import java.util.Map;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listbatchunsubscribe.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/listupdatemember.func.php
  * 
+ * @param M type of subscriber data (see {@link #merge_vars}). Must be specified in concrete subclasses.
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @APIMethod
-public class ListBatchUnsubscribe extends HasListIdMethod<ListBatchUnsubscribeResult> {
+public abstract class ListUpdateMember<M extends MailChimpObject> extends HasListIdMethod<Boolean> {
 
 	@APIMethodParam
-	public List<String> emails;
+	public String email_address;
 	
 	@APIMethodParam
-	public Boolean delete_member;
+	public M merge_vars;
 	
 	@APIMethodParam
-	public Boolean send_goodbye;
+	public EmailType email_type;
 	
 	@APIMethodParam
-	public Boolean send_notify;
-
+	public Boolean replace_interests;
+	
 	@Override
-	public Class<ListBatchUnsubscribeResult> getResultType() {
-		return ListBatchUnsubscribeResult.class;
+	public Class<Boolean> getResultType() {
+		return Boolean.class;
 	}
 }

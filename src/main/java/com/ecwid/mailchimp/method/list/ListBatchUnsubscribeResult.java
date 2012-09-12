@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
 import com.ecwid.mailchimp.annotation.APIMethodParam;
+import com.ecwid.mailchimp.method.MailChimpObject;
 import java.util.List;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchSubscribeResult extends MailChimpObject {
+public class ListBatchUnsubscribeResult extends MailChimpObject {
 	
 	@APIMethodParam
-	public Integer add_count;
-	
-	@APIMethodParam
-	public Integer update_count;
+	public Integer success_count;
 	
 	@APIMethodParam
 	public Integer error_count;

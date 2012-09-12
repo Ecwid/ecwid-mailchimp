@@ -13,23 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
+import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
-import java.util.List;
+import java.util.Date;
 
 /**
+ * See http://apidocs.mailchimp.com/api/1.3/listmembers.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchUnsubscribeResult extends MailChimpObject {
+@APIMethod
+public class ListMembers extends HasListIdMethod<ListMembersResult> {
+
+	@APIMethodParam
+	public MemberStatus status;
 	
 	@APIMethodParam
-	public Integer success_count;
-	
+	public Date since;
+
 	@APIMethodParam
-	public Integer error_count;
-	
+	public Integer start;
+
 	@APIMethodParam
-	public List<ListBatchError> errors;
+	public Integer limit;
+	
+	@Override
+	public Class<ListMembersResult> getResultType() {
+		return ListMembersResult.class;
+	}
 }

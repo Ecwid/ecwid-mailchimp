@@ -13,19 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
-
-import com.ecwid.mailchimp.annotation.APIMethodParam;
+package com.ecwid.mailchimp.method.list;
 
 /**
- * Base class for all MailChimp methods which have the list id field.
- * 
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public abstract class HasListIdMethod<R> extends MailChimpMethod<R> {
-	/**
-	 * MailChimp list id.
-	 */
-	@APIMethodParam
-	public String id;
+public enum EmailType {
+	html, text, mobile;
 }

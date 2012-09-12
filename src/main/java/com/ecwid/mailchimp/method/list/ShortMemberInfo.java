@@ -13,43 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
-import java.util.Map;
+import com.ecwid.mailchimp.method.MailChimpObject;
+import java.util.Date;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php
- * 
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@APIMethod
-public class ListSubscribe extends HasListIdMethod<Boolean> {
-
+public class ShortMemberInfo extends MailChimpObject {
 	@APIMethodParam
-	public String email_address;
+	public String email;
 	
 	@APIMethodParam
-	public Map<String, Object> merge_vars;
-	
-	@APIMethodParam
-	public EmailType email_type;
-	
-	@APIMethodParam
-	public Boolean double_optin;
-	
-	@APIMethodParam
-	public Boolean update_existing;
-	
-	@APIMethodParam
-	public Boolean replace_interests;
-	
-	@APIMethodParam
-	public Boolean send_welcome;
-	
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
+	public Date timestamp;
 }

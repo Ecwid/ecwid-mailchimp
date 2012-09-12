@@ -13,25 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
-import java.util.List;
+import com.ecwid.mailchimp.method.MailChimpObject;
+import java.util.Date;
+import java.util.Map;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listmemberinfo.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@APIMethod
-public class ListMemberInfo extends HasListIdMethod<ListMemberInfoResult> {
-
+public class MemberInfo extends MailChimpObject {
 	@APIMethodParam
-	public List<String> email_address;
+	public String id;
+	
+	@APIMethodParam
+	public String email;
+	
+	@APIMethodParam
+	public EmailType email_type;
+	
+	@APIMethodParam
+	public Map<String, String> merges;
+	
+	@APIMethodParam
+	public MemberStatus status;
+	
+	@APIMethodParam
+	public Date timestamp;
+	
+	/**
+	 * This field indicates email, associated with {@link #error}.
+	 */
+	@APIMethodParam
+	public String email_address;
 
-	@Override
-	public Class<ListMemberInfoResult> getResultType() {
-		return ListMemberInfoResult.class;
-	}
+	/**
+	 * Error message.
+	 */
+	@APIMethodParam
+	public String error;
 }

@@ -13,23 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
 import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
+import com.ecwid.mailchimp.method.MailChimpObject;
 import java.util.List;
 import java.util.Map;
 
 /**
  * See http://apidocs.mailchimp.com/api/1.3/listbatchsubscribe.func.php
  * 
+ * @param M type of subscribers data (see {@link #batch}). Must be specified in concrete subclasses.
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @APIMethod
-public class ListBatchSubscribe extends HasListIdMethod<ListBatchSubscribeResult> {
+public abstract class ListBatchSubscribe<M extends MailChimpObject> extends HasListIdMethod<ListBatchSubscribeResult> {
 
 	@APIMethodParam
-	public List<? extends Map<String, Object>> batch;
+	public List<M> batch;
 	
 	@APIMethodParam
 	public Boolean double_optin;

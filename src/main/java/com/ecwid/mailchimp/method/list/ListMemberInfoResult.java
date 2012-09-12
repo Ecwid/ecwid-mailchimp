@@ -13,33 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethod;
 import com.ecwid.mailchimp.annotation.APIMethodParam;
+import com.ecwid.mailchimp.method.MailChimpObject;
+import java.util.List;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listunsubscribe.func.php
- * 
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@APIMethod
-public class ListUnsubscribe extends HasListIdMethod<Boolean> {
-
+public class ListMemberInfoResult extends MailChimpObject {
 	@APIMethodParam
-	public String email_address;
+	public Integer success;
 	
 	@APIMethodParam
-	public Boolean delete_member;
+	public Integer errors;
 	
 	@APIMethodParam
-	public Boolean send_goodbye;
-	
-	@APIMethodParam
-	public Boolean send_notify;
-	
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
+	public List<MemberInfo> data;
 }
