@@ -15,7 +15,6 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.annotation.APIMethodParam;
 import com.ecwid.mailchimp.method.list.ListBatchSubscribeResult;
 import com.ecwid.mailchimp.method.list.ListBatchUnsubscribe;
 import com.ecwid.mailchimp.method.list.ListBatchUnsubscribeResult;
@@ -24,7 +23,9 @@ import com.ecwid.mailchimp.method.list.ListMemberInfoResult;
 import com.ecwid.mailchimp.method.list.ListMembers;
 import com.ecwid.mailchimp.method.list.ListMembersResult;
 import com.ecwid.mailchimp.method.list.ListUnsubscribe;
-import com.ecwid.mailchimp.method.MailChimpObject;
+import com.ecwid.mailchimp.method.list.ListBatchSubscribe;
+import com.ecwid.mailchimp.method.list.ListSubscribe;
+import com.ecwid.mailchimp.method.list.ListUpdateMember;
 import com.ecwid.mailchimp.method.list.MemberStatus;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class MailChimpClientTest {
 	private MailChimpClient client;
 
 	private class MergeVars extends MailChimpObject {
-		@APIMethodParam
+		@Field
 		private final String EMAIL, FNAME, LNAME;
 
 		public MergeVars(String email, String fname, String lname) {
@@ -78,10 +79,6 @@ public class MailChimpClientTest {
 			this.LNAME = lname;
 		}
 	}
-
-	private static class ListBatchSubscribe extends com.ecwid.mailchimp.method.list.ListBatchSubscribe<MergeVars> { }
-	private static class ListSubscribe extends com.ecwid.mailchimp.method.list.ListSubscribe<MergeVars> { }
-	private static class ListUpdateMember extends com.ecwid.mailchimp.method.list.ListUpdateMember<MergeVars> { }
 
 	@Before
 	public void setUp() throws Exception {

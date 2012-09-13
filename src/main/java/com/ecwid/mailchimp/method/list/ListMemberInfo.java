@@ -15,8 +15,7 @@
  */
 package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethod;
-import com.ecwid.mailchimp.annotation.APIMethodParam;
+import com.ecwid.mailchimp.MailChimpMethod;
 import java.util.List;
 
 /**
@@ -24,10 +23,10 @@ import java.util.List;
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@APIMethod
+@MailChimpMethod.Name("listMemberInfo")
 public class ListMemberInfo extends HasListIdMethod<ListMemberInfoResult> {
 
-	@APIMethodParam
+	@Field
 	public List<String> email_address;
 
 	@Override

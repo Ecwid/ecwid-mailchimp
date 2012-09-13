@@ -15,7 +15,6 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.annotation.APIMethodParam;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.Date;
@@ -28,11 +27,11 @@ import static org.junit.Assert.*;
  */
 public class MailChimpGsonFactoryTest {
 	
-	private class TestObject {
-		@APIMethodParam
+	private class TestObject extends MailChimpObject {
+		@Field
 		Date date;
 		
-		@APIMethodParam(name = "email_address")
+		@Field(name = "email_address")
 		String email;
 		
 		String unserializable;

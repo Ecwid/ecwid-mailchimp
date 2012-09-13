@@ -15,8 +15,7 @@
  */
 package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethodParam;
-import com.ecwid.mailchimp.method.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
  * Base class for all MailChimp methods which have the list id field.
@@ -27,6 +26,6 @@ public abstract class HasListIdMethod<R> extends MailChimpMethod<R> {
 	/**
 	 * MailChimp list id.
 	 */
-	@APIMethodParam
+	@Field
 	public String id;
 }

@@ -15,43 +15,42 @@
  */
 package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethodParam;
-import com.ecwid.mailchimp.method.MailChimpObject;
+import com.ecwid.mailchimp.MailChimpMap;
+import com.ecwid.mailchimp.MailChimpObject;
 import java.util.Date;
-import java.util.Map;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class MemberInfo extends MailChimpObject {
-	@APIMethodParam
+	@Field
 	public String id;
 	
-	@APIMethodParam
+	@Field
 	public String email;
 	
-	@APIMethodParam
+	@Field
 	public EmailType email_type;
 	
-	@APIMethodParam
-	public Map<String, String> merges;
+	@Field
+	public MailChimpMap merges;
 	
-	@APIMethodParam
+	@Field
 	public MemberStatus status;
 	
-	@APIMethodParam
+	@Field
 	public Date timestamp;
 	
 	/**
 	 * This field indicates email, associated with {@link #error}.
 	 */
-	@APIMethodParam
+	@Field
 	public String email_address;
 
 	/**
 	 * Error message.
 	 */
-	@APIMethodParam
+	@Field
 	public String error;
 }

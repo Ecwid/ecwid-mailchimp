@@ -15,8 +15,7 @@
  */
 package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethodParam;
-import com.ecwid.mailchimp.method.MailChimpObject;
+import com.ecwid.mailchimp.MailChimpObject;
 import java.util.List;
 
 /**
@@ -25,12 +24,12 @@ import java.util.List;
  */
 public class ListBatchUnsubscribeResult extends MailChimpObject {
 	
-	@APIMethodParam
+	@Field
 	public Integer success_count;
 	
-	@APIMethodParam
+	@Field
 	public Integer error_count;
 	
-	@APIMethodParam
+	@Field
 	public List<ListBatchError> errors;
 }

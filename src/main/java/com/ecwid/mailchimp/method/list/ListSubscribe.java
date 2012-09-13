@@ -15,40 +15,36 @@
  */
 package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.APIMethod;
-import com.ecwid.mailchimp.annotation.APIMethodParam;
-import com.ecwid.mailchimp.method.MailChimpObject;
-import java.util.Map;
+import com.ecwid.mailchimp.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpObject;
 
 /**
  * See http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php
  * 
- * @param M type of subscriber data (see {@link #merge_vars}). Must be specified in concrete subclasses.
- *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@APIMethod
-public abstract class ListSubscribe<M extends MailChimpObject> extends HasListIdMethod<Boolean> {
+@MailChimpMethod.Name("listSubscribe")
+public class ListSubscribe extends HasListIdMethod<Boolean> {
 
-	@APIMethodParam
+	@Field
 	public String email_address;
 	
-	@APIMethodParam
-	public M merge_vars;
+	@Field
+	public MailChimpObject merge_vars;
 	
-	@APIMethodParam
+	@Field
 	public EmailType email_type;
 	
-	@APIMethodParam
+	@Field
 	public Boolean double_optin;
 	
-	@APIMethodParam
+	@Field
 	public Boolean update_existing;
 	
-	@APIMethodParam
+	@Field
 	public Boolean replace_interests;
 	
-	@APIMethodParam
+	@Field
 	public Boolean send_welcome;
 	
 	@Override
