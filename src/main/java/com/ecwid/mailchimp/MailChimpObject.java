@@ -106,7 +106,7 @@ public abstract class MailChimpObject {
 	}
 
 	/**
-	 * @return simple class name bollowed by a colon and the json-representation of this object
+	 * @return simple class name followed by a colon and the json-representation of this object
 	 */
 	@Override
 	public final String toString() {
