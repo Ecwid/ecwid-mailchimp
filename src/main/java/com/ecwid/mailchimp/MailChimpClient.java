@@ -17,7 +17,6 @@ package com.ecwid.mailchimp;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -39,7 +38,6 @@ public class MailChimpClient {
 	private static final Logger log = Logger.getLogger(MailChimpClient.class.getName());
 	
 	private final HttpClient http = new DefaultHttpClient();
-	private final Gson gson = MailChimpGsonFactory.createGson();
 	
 	private String execute(String url, String request) throws IOException {
 		if(log.isLoggable(Level.FINE)) {
@@ -61,10 +59,12 @@ public class MailChimpClient {
 	/**
 	 * Execute MailChimp API method.
 	 * 
-	 * @param method API method to be executed
-	 * @return method execution result
+	 * @param method MailChimp API method to be executed
+	 * @return execution result
 	 */
 	public <R> R execute(MailChimpMethod<R> method) throws IOException, MailChimpException {
+		final Gson gson = MailChimpGsonFactory.createGson();
+
 		JsonElement result = execute(buildUrl(method), gson.toJsonTree(method));
 		if(result.isJsonObject()) {
 			JsonElement error = result.getAsJsonObject().get("error");		
@@ -73,6 +73,7 @@ public class MailChimpClient {
 				throw new MailChimpException(code.getAsInt(), error.getAsString());
 			}
 		}
+		
 		return gson.fromJson(result, method.getResultType());
 	}
 	

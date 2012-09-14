@@ -1,5 +1,7 @@
 MailChimp API Wrapper for Java
-Refer to com.ecwid.mailchimp.MailChimpClientTest for usage examples.
+
+Refer to the Wiki page for details.
+Usage examples can be found in com.ecwid.mailchimp.MailChimpClientTest.
 
 
 Maven artifact:
@@ -7,6 +9,6 @@ Maven artifact:
 <dependency>
   <groupId>com.ecwid</groupId>
   <artifactId>ecwid-mailchimp</artifactId>
-  <version>1.1</version>
+  <version>1.2.0.1</version>
 </dependency>
 
