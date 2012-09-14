@@ -13,23 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
-
-import com.ecwid.mailchimp.annotation.MailChimpField;
-import java.util.List;
+package com.ecwid.mailchimp.method.list;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listmemberinfo.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListMemberInfo extends HasListIdMethod<ListMemberInfoResult> {
-
-	@MailChimpField
-	public List<String> email_address;
-
-	@Override
-	public Class<ListMemberInfoResult> getResultType() {
-		return ListMemberInfoResult.class;
-	}
+public enum EmailType {
+	html, text, mobile;
 }

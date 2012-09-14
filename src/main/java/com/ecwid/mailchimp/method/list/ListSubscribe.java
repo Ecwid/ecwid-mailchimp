@@ -13,29 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
-import java.util.Map;
+import com.ecwid.mailchimp.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpObject;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listupdatemember.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListUpdateMember extends HasListIdMethod<Boolean> {
+@MailChimpMethod.Name("listSubscribe")
+public class ListSubscribe extends HasListIdMethod<Boolean> {
 
-	@MailChimpField
+	@Field
 	public String email_address;
 	
-	@MailChimpField
-	public Map<String, Object> merge_vars;
+	@Field
+	public MailChimpObject merge_vars;
 	
-	@MailChimpField
+	@Field
 	public EmailType email_type;
 	
-	@MailChimpField
+	@Field
+	public Boolean double_optin;
+	
+	@Field
+	public Boolean update_existing;
+	
+	@Field
 	public Boolean replace_interests;
+	
+	@Field
+	public Boolean send_welcome;
 	
 	@Override
 	public Class<Boolean> getResultType() {

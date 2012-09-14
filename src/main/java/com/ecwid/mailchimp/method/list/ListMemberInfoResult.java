@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.MailChimpObject;
 import java.util.List;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListMembersResult extends MailChimpObject {
-	@MailChimpField
-	public Integer total;
+public class ListMemberInfoResult extends MailChimpObject {
+	@Field
+	public Integer success;
 	
-	@MailChimpField
-	public List<ShortMemberInfo> data;
+	@Field
+	public Integer errors;
+	
+	@Field
+	public List<MemberInfo> data;
 }

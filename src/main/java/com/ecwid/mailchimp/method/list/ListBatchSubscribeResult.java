@@ -13,33 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.MailChimpObject;
 import java.util.List;
-import java.util.Map;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listbatchsubscribe.func.php
- * 
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchSubscribe extends HasListIdMethod<ListBatchSubscribeResult> {
-
-	@MailChimpField
-	public List<? extends Map<String, Object>> batch;
+public class ListBatchSubscribeResult extends MailChimpObject {
 	
-	@MailChimpField
-	public Boolean double_optin;
+	@Field
+	public Integer add_count;
 	
-	@MailChimpField
-	public Boolean update_existing;
+	@Field
+	public Integer update_count;
 	
-	@MailChimpField
-	public Boolean replace_interests;
+	@Field
+	public Integer error_count;
 	
-	@Override
-	public Class<ListBatchSubscribeResult> getResultType() {
-		return ListBatchSubscribeResult.class;
-	}
+	@Field
+	public List<ListBatchError> errors;
 }

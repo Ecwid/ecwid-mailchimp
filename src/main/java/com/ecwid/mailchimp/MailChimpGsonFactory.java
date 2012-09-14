@@ -15,7 +15,6 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.FieldNamingStrategy;
@@ -28,6 +27,12 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
@@ -41,14 +46,14 @@ import java.util.TimeZone;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MailChimpGsonFactory {
+class MailChimpGsonFactory {
 	
 	private MailChimpGsonFactory() { }
 	
 	private static final ExclusionStrategy exclusionStrategy = new ExclusionStrategy() {
 		@Override
 		public boolean shouldSkipField(FieldAttributes fa) {
-			return fa.getAnnotation(MailChimpField.class) == null;
+			return !MailChimpObject.class.isAssignableFrom(fa.getDeclaringClass()) || fa.getAnnotation(MailChimpObject.Field.class) == null;
 		}
 
 		@Override
@@ -60,11 +65,46 @@ public class MailChimpGsonFactory {
 	private static FieldNamingStrategy fieldNamingStrategy = new FieldNamingStrategy() {
 		@Override
 		public String translateName(Field field) {
-			String name = field.getAnnotation(MailChimpField.class).name();
+			String name = field.getAnnotation(MailChimpObject.Field.class).name();
 			return name.isEmpty()? field.getName() : name;
 		}
 	};
-	
+
+	private static final TypeAdapterFactory mailChimpObjectAdapterFactory = new TypeAdapterFactory() {
+		@Override
+		public <T> TypeAdapter<T> create(final Gson gson, TypeToken<T> type) {
+			if(type.getRawType() == MailChimpObject.class) {
+				return (TypeAdapter<T>) new TypeAdapter<MailChimpObject>() {
+					@Override
+					public void write(JsonWriter out, MailChimpObject value) throws IOException {
+						if (value == null) {
+							out.nullValue();
+							return;
+						}
+
+						@SuppressWarnings("unchecked")
+						TypeAdapter<MailChimpObject> typeAdapter = (TypeAdapter<MailChimpObject>) gson.getAdapter(value.getClass());
+						if(typeAdapter.getClass() != getClass()) {
+							assert value.getClass() != MailChimpObject.class;
+							typeAdapter.write(out, value);
+						} else {
+							assert value.getClass() == MailChimpObject.class;
+							out.beginObject();
+							out.endObject();
+						}
+					}
+
+					@Override
+					public MailChimpObject read(JsonReader in) throws IOException {
+						return gson.getAdapter(MailChimpMap.class).read(in);
+					}
+				};
+			} else {
+				return null;
+			}
+		}
+	};
+
 	/**
 	 * Translates dates to json strings and vice versa.
 	 * <p>
@@ -96,11 +136,12 @@ public class MailChimpGsonFactory {
 			}
 		}
 	}
-	
+
 	public static Gson createGson() {
 		GsonBuilder builder = new GsonBuilder();
 		builder.setExclusionStrategies(exclusionStrategy);
 		builder.setFieldNamingStrategy(fieldNamingStrategy);
+		builder.registerTypeAdapterFactory(mailChimpObjectAdapterFactory);
 		builder.registerTypeAdapter(Date.class, new DateTypeAdapter());
 		return builder.create();
 	}

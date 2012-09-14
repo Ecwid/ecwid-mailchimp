@@ -13,9 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 
 /**
  * Abstract class representing MailChimp API call.
@@ -27,20 +32,40 @@ import com.ecwid.mailchimp.annotation.MailChimpField;
 public abstract class MailChimpMethod<R> extends MailChimpObject {
 
 	/**
+	 * This annotation marks subclasses of {@link MailChimpMethod} to specify the corresponding API method names.
+	 */
+	@Documented
+	@Retention(value = RetentionPolicy.RUNTIME)
+	@Target(value = ElementType.TYPE)
+	public @interface Name {
+		/**
+		 * The name of MailChimp API method.
+		 */
+		public String value();
+	}
+
+	/**
 	 * API key to access MailChimp service.
 	 */
-	@MailChimpField
+	@Field
 	public String apikey;
 	
 	/**
 	 * Get MailChimp API method name.
-	 * By default returns the simple class name with the first letter lowercased.
+	 * See {@link Name} for details.
+	 *
+	 * @throws IllegalArgumentException if neither this class nor any of its superclasses
+	 * are annotated with {@link Name}.
 	 */
-	public String getMethodName() {
-		String name = getClass().getSimpleName();
-		String head = name.substring(0, 1).toLowerCase();
-		String tail = name.substring(1);
-		return head + tail;
+	public final String getMethodName() {
+		for(Class<?> c=getClass(); c != null; c=c.getSuperclass()) {
+			Name a = c.getAnnotation(Name.class);
+			if(a != null) {
+				return a.value();
+			}
+		}
+
+		throw new IllegalArgumentException("Neither "+getClass()+" nor its superclasses are annotated with "+Name.class);
 	}
 
 	/**

@@ -13,19 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
-import java.util.Date;
+import com.ecwid.mailchimp.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpObject;
 
 /**
- *
+ * See http://apidocs.mailchimp.com/api/1.3/listupdatemember.func.php
+ * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ShortMemberInfo extends MailChimpObject {
-	@MailChimpField
-	public String email;
+@MailChimpMethod.Name("listUpdateMember")
+public class ListUpdateMember extends HasListIdMethod<Boolean> {
+
+	@Field
+	public String email_address;
 	
-	@MailChimpField
-	public Date timestamp;
+	@Field
+	public MailChimpObject merge_vars;
+	
+	@Field
+	public EmailType email_type;
+	
+	@Field
+	public Boolean replace_interests;
+	
+	@Override
+	public Class<Boolean> getResultType() {
+		return Boolean.class;
+	}
 }

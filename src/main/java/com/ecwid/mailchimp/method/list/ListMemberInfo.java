@@ -13,32 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
-import java.util.Date;
+import com.ecwid.mailchimp.MailChimpMethod;
+import java.util.List;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listmembers.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/listmemberinfo.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListMembers extends HasListIdMethod<ListMembersResult> {
+@MailChimpMethod.Name("listMemberInfo")
+public class ListMemberInfo extends HasListIdMethod<ListMemberInfoResult> {
 
-	@MailChimpField
-	public MemberStatus status;
-	
-	@MailChimpField
-	public Date since;
+	@Field
+	public List<String> email_address;
 
-	@MailChimpField
-	public Integer start;
-
-	@MailChimpField
-	public Integer limit;
-	
 	@Override
-	public Class<ListMembersResult> getResultType() {
-		return ListMembersResult.class;
+	public Class<ListMemberInfoResult> getResultType() {
+		return ListMemberInfoResult.class;
 	}
 }

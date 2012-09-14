@@ -13,22 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
+import com.ecwid.mailchimp.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpObject;
+import java.util.List;
+
 
 /**
- *
+ * See http://apidocs.mailchimp.com/api/1.3/listbatchsubscribe.func.php
+ * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchError extends MailChimpObject {
+@MailChimpMethod.Name("listBatchSubscribe")
+public class ListBatchSubscribe extends HasListIdMethod<ListBatchSubscribeResult> {
+
+	@Field
+	public List<? extends MailChimpObject> batch;
 	
-	@MailChimpField
-	public String email;
+	@Field
+	public Boolean double_optin;
 	
-	@MailChimpField
-	public Integer code;
+	@Field
+	public Boolean update_existing;
 	
-	@MailChimpField
-	public String message;
+	@Field
+	public Boolean replace_interests;
+	
+	@Override
+	public Class<ListBatchSubscribeResult> getResultType() {
+		return ListBatchSubscribeResult.class;
+	}
 }

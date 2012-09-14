@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
+
+import com.ecwid.mailchimp.MailChimpObject;
+import java.util.Date;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public enum EmailType {
-	html, text, mobile;
+public class ShortMemberInfo extends MailChimpObject {
+	@Field
+	public String email;
+	
+	@Field
+	public Date timestamp;
 }

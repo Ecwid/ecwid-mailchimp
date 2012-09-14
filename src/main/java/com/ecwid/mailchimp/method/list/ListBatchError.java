@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
-import java.util.List;
+import com.ecwid.mailchimp.MailChimpObject;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListBatchUnsubscribeResult extends MailChimpObject {
+public class ListBatchError extends MailChimpObject {
 	
-	@MailChimpField
-	public Integer success_count;
+	@Field
+	public String email;
 	
-	@MailChimpField
-	public Integer error_count;
+	@Field
+	public Integer code;
 	
-	@MailChimpField
-	public List<ListBatchError> errors;
+	@Field
+	public String message;
 }

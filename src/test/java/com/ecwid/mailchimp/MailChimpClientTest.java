@@ -15,22 +15,21 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.method.ListBatchSubscribe;
-import com.ecwid.mailchimp.method.ListBatchSubscribeResult;
-import com.ecwid.mailchimp.method.ListBatchUnsubscribe;
-import com.ecwid.mailchimp.method.ListBatchUnsubscribeResult;
-import com.ecwid.mailchimp.method.ListMemberInfo;
-import com.ecwid.mailchimp.method.ListMemberInfoResult;
-import com.ecwid.mailchimp.method.ListMembers;
-import com.ecwid.mailchimp.method.ListMembersResult;
-import com.ecwid.mailchimp.method.ListSubscribe;
-import com.ecwid.mailchimp.method.ListUnsubscribe;
-import com.ecwid.mailchimp.method.ListUpdateMember;
-import com.ecwid.mailchimp.method.MemberStatus;
+import com.ecwid.mailchimp.method.list.ListBatchSubscribeResult;
+import com.ecwid.mailchimp.method.list.ListBatchUnsubscribe;
+import com.ecwid.mailchimp.method.list.ListBatchUnsubscribeResult;
+import com.ecwid.mailchimp.method.list.ListMemberInfo;
+import com.ecwid.mailchimp.method.list.ListMemberInfoResult;
+import com.ecwid.mailchimp.method.list.ListMembers;
+import com.ecwid.mailchimp.method.list.ListMembersResult;
+import com.ecwid.mailchimp.method.list.ListUnsubscribe;
+import com.ecwid.mailchimp.method.list.ListBatchSubscribe;
+import com.ecwid.mailchimp.method.list.ListSubscribe;
+import com.ecwid.mailchimp.method.list.ListUpdateMember;
+import com.ecwid.mailchimp.method.list.MemberStatus;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -69,7 +68,18 @@ public class MailChimpClientTest {
 	}
 	
 	private MailChimpClient client;
-	
+
+	private class MergeVars extends MailChimpObject {
+		@Field
+		private final String EMAIL, FNAME, LNAME;
+
+		public MergeVars(String email, String fname, String lname) {
+			this.EMAIL = email;
+			this.FNAME = fname;
+			this.LNAME = lname;
+		}
+	}
+
 	@Before
 	public void setUp() throws Exception {
 		client = new MailChimpClient();
@@ -111,10 +121,7 @@ public class MailChimpClientTest {
 		listSubscribe.email_address = email(0);
 		listSubscribe.double_optin = false;
 		listSubscribe.update_existing = false;
-		listSubscribe.merge_vars = new HashMap<String, Object>();
-		listSubscribe.merge_vars.put("FNAME", "Vasya");
-		listSubscribe.merge_vars.put("LNAME", "Pupkin");
-		
+		listSubscribe.merge_vars = new MergeVars(null, "Vasya", "Pupkin");
 		assertTrue(client.execute(listSubscribe));
 		
 		try {
@@ -135,8 +142,7 @@ public class MailChimpClientTest {
 		listUpdateMember.apikey = API_KEY;
 		listUpdateMember.id = LIST_ID;
 		listUpdateMember.email_address = email(0);
-		listUpdateMember.merge_vars = new HashMap<String, Object>();
-		listUpdateMember.merge_vars.put("LNAME", "Popkin");
+		listUpdateMember.merge_vars = new MergeVars(null, null, "Popkin");
 		assertTrue(client.execute(listUpdateMember));
 		
 		ListUnsubscribe listUnsubscribe = new ListUnsubscribe();
@@ -183,13 +189,9 @@ public class MailChimpClientTest {
 		request.double_optin = double_optin;
 		request.update_existing = update_existing;
 		
-		List<Map<String, Object>> batch = new ArrayList<Map<String, Object>>();
+		List<MergeVars> batch = new ArrayList<MergeVars>();
 		for(int i=from; i<from+count; i++) {
-			Map<String,Object> mv = new HashMap<String,Object>();
-			mv.put("EMAIL", email(i));
-			mv.put("FNAME", "Batch"+i);
-			mv.put("LNAME", "Subscribed"+i);
-			batch.add(mv);
+			batch.add(new MergeVars(email(i), "Batch"+i, "Subscribed"+i));
 		}
 		request.batch = batch;
 		

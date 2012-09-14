@@ -13,41 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.annotation.MailChimpField;
-import java.util.Map;
+import com.ecwid.mailchimp.MailChimpMethod;
+import java.util.List;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/listbatchunsubscribe.func.php
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class ListSubscribe extends HasListIdMethod<Boolean> {
+@MailChimpMethod.Name("listBatchUnsubscribe")
+public class ListBatchUnsubscribe extends HasListIdMethod<ListBatchUnsubscribeResult> {
 
-	@MailChimpField
-	public String email_address;
+	@Field
+	public List<String> emails;
 	
-	@MailChimpField
-	public Map<String, Object> merge_vars;
+	@Field
+	public Boolean delete_member;
 	
-	@MailChimpField
-	public EmailType email_type;
+	@Field
+	public Boolean send_goodbye;
 	
-	@MailChimpField
-	public Boolean double_optin;
-	
-	@MailChimpField
-	public Boolean update_existing;
-	
-	@MailChimpField
-	public Boolean replace_interests;
-	
-	@MailChimpField
-	public Boolean send_welcome;
-	
+	@Field
+	public Boolean send_notify;
+
 	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
+	public Class<ListBatchUnsubscribeResult> getResultType() {
+		return ListBatchUnsubscribeResult.class;
 	}
 }

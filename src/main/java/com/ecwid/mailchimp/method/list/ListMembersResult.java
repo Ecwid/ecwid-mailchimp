@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.annotation;
+package com.ecwid.mailchimp.method.list;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.ecwid.mailchimp.MailChimpObject;
+import java.util.List;
 
 /**
- * This annotation marks fields to be serialized/deserialed by the API wrapper.
- * 
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@Documented
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = ElementType.FIELD)
-public @interface MailChimpField {
-	public String name() default "";
+public class ListMembersResult extends MailChimpObject {
+	@Field
+	public Integer total;
+	
+	@Field
+	public List<ShortMemberInfo> data;
 }
