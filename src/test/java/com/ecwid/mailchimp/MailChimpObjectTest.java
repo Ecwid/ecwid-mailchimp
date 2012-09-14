@@ -24,78 +24,79 @@ import static org.junit.Assert.*;
  */
 public class MailChimpObjectTest {
 
-	private class Test1 extends MailChimpObject {
+	private class TestBase extends MailChimpObject {
 		@Field
-		private String f1;
-
-		private String f2;
+		String f1;
 	}
 
-	private class Test2 extends MailChimpObject {
+	private class TestObject extends TestBase {
 		@Field
-		private String f1;
+		int f2;
 
-		private String f2;
+		String ignored;
+	}
 
-		@Override
-		public int hashCode() {
-			int hash = 7;
-			hash = 59 * hash + (this.f1 != null ? this.f1.hashCode() : 0);
-			hash = 59 * hash + (this.f2 != null ? this.f2.hashCode() : 0);
-			return hash;
-		}
+	private class Test1 extends TestObject { }
+	private class Test2 extends TestObject { }
 
-		@Override
-		public boolean equals(Object obj) {
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
-				return false;
-			}
-			final Test2 other = (Test2) obj;
-			if ((this.f1 == null) ? (other.f1 != null) : !this.f1.equals(other.f1)) {
-				return false;
-			}
-			if ((this.f2 == null) ? (other.f2 != null) : !this.f2.equals(other.f2)) {
-				return false;
-			}
-			return true;
-		}
+	@Test
+	public void testEquals_same() {
+		TestObject test = new TestObject();
+		assertEqual(test, test);
+	}
+
+	@Test
+	public void testEquals_null() {
+		TestObject test = new TestObject();
+		assertFalse(test.equals(null));
 	}
 
 	@Test
 	public void testEqualsAndHashCode_differentClasses() {
 		Test1 t1 = new Test1();
 		Test2 t2 = new Test2();
-
-		assertFalse(t1.equals(t2));
-		assertFalse(t1.hashCode() == t2.hashCode());
+		assertNotEqual(t1, t2);
 	}
 
 	@Test
 	public void testEqualsAndHashCode_sameClass() {
-		Test1 t1 = new Test1();
-		Test1 t2 = new Test1();
-		assertTrue(t1.equals(t2));
-		assertTrue(t1.hashCode() == t2.hashCode());
+		class Test1 extends TestObject { }
+		class Test2 extends TestObject { }
+
+		TestObject t1 = new TestObject();
+		TestObject t2 = new TestObject();
+		assertEqual(t1, t2);
 
 		t1.f1 = "f1";
-		assertFalse(t1.equals(t2));
-		assertFalse(t1.hashCode() == t2.hashCode());
+		assertNotEqual(t1, t2);
 
 		t2.f1 = "???";
-		assertFalse(t1.equals(t2));
-		assertFalse(t1.hashCode() == t2.hashCode());
+		assertNotEqual(t1, t2);
 
 		t2.f1 = "f1";
-		assertTrue(t1.equals(t2));
-		assertTrue(t1.hashCode() == t2.hashCode());
+		assertEqual(t1, t2);
 
-		// ignored field
-		t1.f2 = "111";
-		t2.f2 = "222";
+		t1.f2 = 555;
+		assertNotEqual(t1, t2);
+
+		t2.f2 = 666;
+		assertNotEqual(t1, t2);
+
+		t2.f2 = 555;
+		assertEqual(t1, t2);
+
+		t1.ignored = "111";
+		t2.ignored = "222";
+		assertEqual(t1, t2);
+	}
+
+	private void assertEqual(TestObject t1, TestObject t2) {
 		assertTrue(t1.equals(t2));
 		assertTrue(t1.hashCode() == t2.hashCode());
+	}
+
+	private void assertNotEqual(TestObject t1, TestObject t2) {
+		assertFalse(t1.equals(t2));
+		assertFalse(t1.hashCode() == t2.hashCode());
 	}
 }

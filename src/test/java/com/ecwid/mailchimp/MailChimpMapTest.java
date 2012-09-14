@@ -24,10 +24,6 @@ import static org.junit.Assert.*;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class MailChimpMapTest {
-
-	public MailChimpMapTest() {
-	}
-
 	@Test
 	public void testEqualsAndHashCode() {
 		MailChimpMap m1 = new MailChimpMap();
