@@ -60,11 +60,9 @@ public class MailChimpClientTest {
 	
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		Properties p = new Properties();
-		p.load(MailChimpClientTest.class.getResourceAsStream("mailchimp.test.properties"));
-		API_KEY = p.getProperty("mailchimp.test.apikey");
-		LIST_ID = p.getProperty("mailchimp.test.listid");
-		GMAIL_USERNAME = p.getProperty("mailchimp.test.gmail_username");
+		API_KEY = System.getProperty("mailchimp.test.apikey");
+		LIST_ID = System.getProperty("mailchimp.test.listid");
+		GMAIL_USERNAME = System.getProperty("mailchimp.test.gmail_username");
 	}
 	
 	private MailChimpClient client;
