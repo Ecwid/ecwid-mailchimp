@@ -24,7 +24,7 @@ import com.ecwid.mailchimp.MailChimpObject;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Name("listUpdateMember")
-public class ListUpdateMember extends HasListIdMethod<Boolean> {
+public class ListUpdateMemberMethod extends HasListIdMethod<Boolean> {
 
 	@Field
 	public String email_address;

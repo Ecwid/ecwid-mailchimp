@@ -13,34 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp;
+package com.ecwid.mailchimp.method.list;
 
+import com.ecwid.mailchimp.MailChimpMethod;
 import java.util.Date;
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
 
 /**
+ * See http://apidocs.mailchimp.com/api/1.3/listmembers.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MailChimpMapTest {
-	@Test
-	public void testEqualsAndHashCode() {
-		MailChimpMap m1 = new MailChimpMap();
-		MailChimpMap m2 = new MailChimpMap();
-		assertTrue(m1.equals(m2));
-		assertTrue(m1.hashCode() == m2.hashCode());
+@MailChimpMethod.Name("listMembers")
+public class ListMembersMethod extends HasListIdMethod<ListMembersResult> {
 
-		m1.put("name", "Vasya");
-		assertFalse(m1.equals(m2));
-		assertFalse(m1.hashCode() == m2.hashCode());
+	@Field
+	public MemberStatus status;
+	
+	@Field
+	public Date since;
 
-		m2.put("name", "Vasya");
-		assertTrue(m1.equals(m2));
-		assertTrue(m1.hashCode() == m2.hashCode());
+	@Field
+	public Integer start;
 
-		m1.put("name", new Date());
-		assertFalse(m1.equals(m2));
-		assertFalse(m1.hashCode() == m2.hashCode());
+	@Field
+	public Integer limit;
+	
+	@Override
+	public Class<ListMembersResult> getResultType() {
+		return ListMembersResult.class;
 	}
 }

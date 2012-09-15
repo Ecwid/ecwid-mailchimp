@@ -13,33 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.list;
+package com.ecwid.mailchimp.method.security;
 
 import com.ecwid.mailchimp.MailChimpMethod;
-import java.util.Date;
+
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listmembers.func.php
- *
+ * See http://apidocs.mailchimp.com/api/1.3/apikeyadd.func.php
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@MailChimpMethod.Name("listMembers")
-public class ListMembers extends HasListIdMethod<ListMembersResult> {
-
-	@Field
-	public MemberStatus status;
-	
-	@Field
-	public Date since;
-
-	@Field
-	public Integer start;
-
-	@Field
-	public Integer limit;
-	
+@MailChimpMethod.Name("apikeyAdd")
+public class ApikeyAddMethod extends HasUsernameAndPasswordMethod<String> {
 	@Override
-	public Class<ListMembersResult> getResultType() {
-		return ListMembersResult.class;
+	public Class<String> getResultType() {
+		return String.class;
 	}
 }

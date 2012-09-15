@@ -18,8 +18,8 @@ package com.ecwid.mailchimp;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.Date;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.testng.Assert.*;
+import org.testng.annotations.Test;
 
 /**
  *
@@ -47,16 +47,16 @@ public class MailChimpGsonFactoryTest {
 		o.unserializable = "Unserializable";
 		
 		JsonObject json = gson.toJsonTree(o).getAsJsonObject();
-		assertEquals(2, json.entrySet().size());
-		assertEquals("1970-01-01 00:00:00", json.get("date").getAsString());
-		assertEquals("pupkin@gmail.com", json.get("email_address").getAsString());
+		assertEquals(json.entrySet().size(), 2);
+		assertEquals(json.get("date").getAsString(), "1970-01-01 00:00:00");
+		assertEquals(json.get("email_address").getAsString(), "pupkin@gmail.com");
 		assertNull(json.get("unserializable"));
 		
 		json.addProperty("unserializable", "Unserializable");
 		
 		o = gson.fromJson(json, TestObject.class);
-		assertEquals(new Date(0), o.date);
-		assertEquals("pupkin@gmail.com", o.email);
+		assertEquals(o.date, new Date(0));
+		assertEquals(o.email, "pupkin@gmail.com");
 		assertNull(o.unserializable);
 	}
 }

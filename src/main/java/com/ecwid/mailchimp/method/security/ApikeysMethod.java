@@ -13,32 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.list;
+package com.ecwid.mailchimp.method.security;
 
 import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listunsubscribe.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/apikeys.func.php
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@MailChimpMethod.Name("listUnsubscribe")
-public class ListUnsubscribe extends HasListIdMethod<Boolean> {
+@MailChimpMethod.Name("apikeys")
+public class ApikeysMethod extends HasUsernameAndPasswordMethod<ApikeyInfo[]> {
+	@Field
+	public Boolean expired;
 
-	@Field
-	public String email_address;
-	
-	@Field
-	public Boolean delete_member;
-	
-	@Field
-	public Boolean send_goodbye;
-	
-	@Field
-	public Boolean send_notify;
-	
 	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
+	public Class<ApikeyInfo[]> getResultType() {
+		return ApikeyInfo[].class;
 	}
 }

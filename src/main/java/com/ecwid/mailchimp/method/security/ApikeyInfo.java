@@ -13,34 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp;
+package com.ecwid.mailchimp.method.security;
 
+import com.ecwid.mailchimp.MailChimpObject;
 import java.util.Date;
-import static org.testng.Assert.*;
-import org.testng.annotations.Test;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MailChimpMapTest {
-	@Test
-	public void testEqualsAndHashCode() {
-		MailChimpMap m1 = new MailChimpMap();
-		MailChimpMap m2 = new MailChimpMap();
-		assertTrue(m1.equals(m2));
-		assertTrue(m1.hashCode() == m2.hashCode());
-
-		m1.put("name", "Vasya");
-		assertFalse(m1.equals(m2));
-		assertFalse(m1.hashCode() == m2.hashCode());
-
-		m2.put("name", "Vasya");
-		assertTrue(m1.equals(m2));
-		assertTrue(m1.hashCode() == m2.hashCode());
-
-		m1.put("name", new Date());
-		assertFalse(m1.equals(m2));
-		assertFalse(m1.hashCode() == m2.hashCode());
-	}
+public class ApikeyInfo extends MailChimpObject {
+	@Field
+	public String apikey;
+	
+	@Field
+	public Date created_at, expired_at;
 }

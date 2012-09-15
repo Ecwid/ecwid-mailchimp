@@ -13,62 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.method.list.ListBatchSubscribeResult;
-import com.ecwid.mailchimp.method.list.ListBatchUnsubscribe;
-import com.ecwid.mailchimp.method.list.ListBatchUnsubscribeResult;
-import com.ecwid.mailchimp.method.list.ListMemberInfo;
-import com.ecwid.mailchimp.method.list.ListMemberInfoResult;
-import com.ecwid.mailchimp.method.list.ListMembers;
-import com.ecwid.mailchimp.method.list.ListMembersResult;
-import com.ecwid.mailchimp.method.list.ListUnsubscribe;
-import com.ecwid.mailchimp.method.list.ListBatchSubscribe;
-import com.ecwid.mailchimp.method.list.ListSubscribe;
-import com.ecwid.mailchimp.method.list.ListUpdateMember;
-import com.ecwid.mailchimp.method.list.MemberStatus;
+import com.ecwid.mailchimp.MailChimpException;
+import com.ecwid.mailchimp.MailChimpObject;
+import com.ecwid.mailchimp.method.AbstractMethodTestCase;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
+import static org.testng.Assert.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MailChimpClientTest {
-	private static final Logger log = Logger.getLogger(MailChimpClientTest.class.getName());
+public class ListMethodsTest extends AbstractMethodTestCase {
+	private static final Logger log = Logger.getLogger(ListMethodsTest.class.getName());
 
 	/**
-	 * Max number of emails used in tests.
+	 * Max number of items in batch requests.
 	 */
 	private static final int MAX = 50;
-	
-	private static String API_KEY;
-	private static String LIST_ID;
-	
-	/**
-	 * Username of a gmail account to be used for testing.
-	 */
-	private static String GMAIL_USERNAME;
-	
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		API_KEY = System.getProperty("mailchimp.test.apikey");
-		LIST_ID = System.getProperty("mailchimp.test.listid");
-		GMAIL_USERNAME = System.getProperty("mailchimp.test.gmail_username");
-	}
-	
-	private MailChimpClient client;
 
+	private final String apiKey;
+	private final String listId;
+	
 	private class MergeVars extends MailChimpObject {
-		@Field
+		@MailChimpObject.Field
 		private final String EMAIL, FNAME, LNAME;
 
 		public MergeVars(String email, String fname, String lname) {
@@ -78,100 +52,100 @@ public class MailChimpClientTest {
 		}
 	}
 
-	@Before
-	public void setUp() throws Exception {
-		client = new MailChimpClient();
+	@Parameters({"mailchimp.test.apikey", "mailchimp.test.listid"})
+	public ListMethodsTest(String apiKey, String listId) {
+		this.apiKey = apiKey;
+		this.listId = listId;
+	}
+
+	@BeforeMethod
+	private void beforeMethod() throws Exception {
 		listUnsubscribeBatch(0, MAX, true); // clear everything
 	}
-	
-	@After
-	public void tearDown() {
-		client.close();
-	}
-	
+
 	@Test
 	public void testExecute_ListBatch() throws Exception {
 		ListBatchSubscribeResult batchSubscribeResult = listSubscribeBatch(4, 5, false, false);
-		assertEquals(5, (int) batchSubscribeResult.add_count);
-		assertEquals(0, (int) batchSubscribeResult.update_count);
-		assertEquals(0, (int) batchSubscribeResult.error_count);
-		
+		assertEquals((int) batchSubscribeResult.add_count, 5);
+		assertEquals((int) batchSubscribeResult.update_count, 0);
+		assertEquals((int) batchSubscribeResult.error_count, 0);
+
 		ListMemberInfoResult memberInfoResult = listMemberInfo(3, 5);
-		assertEquals(4, (int) memberInfoResult.success);
-		assertEquals(1, (int) memberInfoResult.errors);
-		
+		assertEquals((int) memberInfoResult.success, 4);
+		assertEquals((int) memberInfoResult.errors, 1);
+
 		ListBatchUnsubscribeResult batchUnsubscribeResult = listUnsubscribeBatch(4, 2, false);
-		assertEquals(2, (int) batchUnsubscribeResult.success_count);
-		assertEquals(0, (int) batchUnsubscribeResult.error_count);
-		
+		assertEquals((int) batchUnsubscribeResult.success_count, 2);
+		assertEquals((int) batchUnsubscribeResult.error_count, 0);
+
 		ListMembersResult membersResult = listMembers(MemberStatus.subscribed);
-		assertEquals(3, (int) membersResult.total);
-		
+		assertEquals((int) membersResult.total, 3);
+
 		membersResult = listMembers(MemberStatus.unsubscribed);
-		assertEquals(2, (int) membersResult.total);
+		assertEquals((int) membersResult.total, 2);
 	}
-	
+
 	@Test
 	public void testExecute_ListSingle() throws Exception {
-		ListSubscribe listSubscribe = new ListSubscribe();
-		listSubscribe.apikey = API_KEY;
-		listSubscribe.id = LIST_ID;
+		ListSubscribeMethod listSubscribe = new ListSubscribeMethod();
+		listSubscribe.apikey = apiKey;
+		listSubscribe.id = listId;
 		listSubscribe.email_address = email(0);
 		listSubscribe.double_optin = false;
 		listSubscribe.update_existing = false;
 		listSubscribe.merge_vars = new MergeVars(null, "Vasya", "Pupkin");
 		assertTrue(client.execute(listSubscribe));
-		
+
 		try {
 			client.execute(listSubscribe);
 			fail();
 		} catch(MailChimpException e) {
 			// aready registered
-			assertEquals(214, e.code);
+			assertEquals(e.code, 214);
 		}
-		
+
 		ListMemberInfoResult listMemberInfoResult = listMemberInfo(0, 1);
-		assertEquals(email(0), listMemberInfoResult.data.get(0).email);
-		assertEquals(MemberStatus.subscribed, listMemberInfoResult.data.get(0).status);
-		assertEquals("Vasya", listMemberInfoResult.data.get(0).merges.get("FNAME"));
-		assertEquals("Pupkin", listMemberInfoResult.data.get(0).merges.get("LNAME"));
-		
-		ListUpdateMember listUpdateMember = new ListUpdateMember();
-		listUpdateMember.apikey = API_KEY;
-		listUpdateMember.id = LIST_ID;
+		assertEquals(listMemberInfoResult.data.get(0).email, email(0));
+		assertEquals(listMemberInfoResult.data.get(0).status, MemberStatus.subscribed);
+		assertEquals(listMemberInfoResult.data.get(0).merges.get("FNAME"), "Vasya");
+		assertEquals(listMemberInfoResult.data.get(0).merges.get("LNAME"), "Pupkin");
+
+		ListUpdateMemberMethod listUpdateMember = new ListUpdateMemberMethod();
+		listUpdateMember.apikey = apiKey;
+		listUpdateMember.id = listId;
 		listUpdateMember.email_address = email(0);
 		listUpdateMember.merge_vars = new MergeVars(null, null, "Popkin");
 		assertTrue(client.execute(listUpdateMember));
-		
-		ListUnsubscribe listUnsubscribe = new ListUnsubscribe();
-		listUnsubscribe.apikey = API_KEY;
-		listUnsubscribe.id = LIST_ID;
+
+		ListUnsubscribeMethod listUnsubscribe = new ListUnsubscribeMethod();
+		listUnsubscribe.apikey = apiKey;
+		listUnsubscribe.id = listId;
 		listUnsubscribe.email_address = email(0);
 		listUnsubscribe.delete_member = false;
 		assertTrue(client.execute(listUnsubscribe));
-		
+
 		listMemberInfoResult = listMemberInfo(0, 1);
-		assertEquals(email(0), listMemberInfoResult.data.get(0).email);
-		assertEquals(MemberStatus.unsubscribed, listMemberInfoResult.data.get(0).status);
-		assertEquals("Vasya", listMemberInfoResult.data.get(0).merges.get("FNAME"));
-		assertEquals("Popkin", listMemberInfoResult.data.get(0).merges.get("LNAME"));
-	
+		assertEquals(listMemberInfoResult.data.get(0).email, email(0));
+		assertEquals(listMemberInfoResult.data.get(0).status, MemberStatus.unsubscribed);
+		assertEquals(listMemberInfoResult.data.get(0).merges.get("FNAME"), "Vasya");
+		assertEquals(listMemberInfoResult.data.get(0).merges.get("LNAME"), "Popkin");
+
 		listUnsubscribe.delete_member = true;
 		assertTrue(client.execute(listUnsubscribe));
-		
+
 		try {
 			client.execute(listUnsubscribe);
 			fail();
 		} catch(MailChimpException e) {
 			// not exist
-			assertEquals(232, e.code);
+			assertEquals(e.code, 232);
 		}
 	}
-	
+
 	private ListBatchUnsubscribeResult listUnsubscribeBatch(int from, int count, boolean delete_member) throws Exception {
-		ListBatchUnsubscribe request = new ListBatchUnsubscribe();
-		request.apikey = API_KEY;
-		request.id = LIST_ID;
+		ListBatchUnsubscribeMethod request = new ListBatchUnsubscribeMethod();
+		request.apikey = apiKey;
+		request.id = listId;
 		request.emails = emails(from, count);
 		request.delete_member = delete_member;
 		ListBatchUnsubscribeResult result = client.execute(request);
@@ -179,45 +153,45 @@ public class MailChimpClientTest {
 		assertEquals(count, result.success_count + result.error_count);
 		return result;
 	}
-	
+
 	private ListBatchSubscribeResult listSubscribeBatch(int from, int count, boolean double_optin, boolean update_existing) throws Exception {
-		ListBatchSubscribe request = new ListBatchSubscribe();
-		request.apikey = API_KEY;
-		request.id = LIST_ID;
+		ListBatchSubscribeMethod request = new ListBatchSubscribeMethod();
+		request.apikey = apiKey;
+		request.id = listId;
 		request.double_optin = double_optin;
 		request.update_existing = update_existing;
-		
+
 		List<MergeVars> batch = new ArrayList<MergeVars>();
 		for(int i=from; i<from+count; i++) {
 			batch.add(new MergeVars(email(i), "Batch"+i, "Subscribed"+i));
 		}
 		request.batch = batch;
-		
+
 		ListBatchSubscribeResult result = client.execute(request);
 		log.info("Result: " + result);
 		return result;
 	}
-	
+
 	private ListMemberInfoResult listMemberInfo(int from, int count) throws Exception {
-		ListMemberInfo request = new ListMemberInfo();
-		request.apikey = API_KEY;
-		request.id = LIST_ID;
+		ListMemberInfoMethod request = new ListMemberInfoMethod();
+		request.apikey = apiKey;
+		request.id = listId;
 		request.email_address = emails(from, count);
 		ListMemberInfoResult result = client.execute(request);
 		log.info("Result: " + result);
 		return result;
 	}
-	
+
 	private ListMembersResult listMembers(MemberStatus status) throws Exception {
-		ListMembers request = new ListMembers();
-		request.apikey = API_KEY;
-		request.id = LIST_ID;
+		ListMembersMethod request = new ListMembersMethod();
+		request.apikey = apiKey;
+		request.id = listId;
 		request.status = status;
 		ListMembersResult result = client.execute(request);
 		log.info("Result: " + result);
 		return result;
 	}
-	
+
 	private List<String> emails(int from, int count) {
 		List<String> result = new ArrayList<String>();
 		for(int i=from; i<from+count; i++) {
@@ -225,9 +199,9 @@ public class MailChimpClientTest {
 		}
 		return result;
 	}
-	
+
 	private String email(int i) {
-		assertTrue(""+i, i >= 0 && i < MAX);
-		return GMAIL_USERNAME + "+"+i+"@gmail.com";
+		assertTrue(i >= 0 && i < MAX, ""+i);
+		return "test+"+i+"@gmail.com";
 	}
 }

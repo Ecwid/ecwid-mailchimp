@@ -13,24 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.list;
-
-import com.ecwid.mailchimp.MailChimpMethod;
-import java.util.List;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listmemberinfo.func.php
- *
- * @author Vasily Karyaev <v.karyaev@gmail.com>
+ * Contains wrappers for security related MailChimp API methods.
+ * See http://apidocs.mailchimp.com/api/1.3/#securityrelated .
  */
-@MailChimpMethod.Name("listMemberInfo")
-public class ListMemberInfo extends HasListIdMethod<ListMemberInfoResult> {
-
-	@Field
-	public List<String> email_address;
-
-	@Override
-	public Class<ListMemberInfoResult> getResultType() {
-		return ListMemberInfoResult.class;
-	}
-}
+package com.ecwid.mailchimp.method.security;
