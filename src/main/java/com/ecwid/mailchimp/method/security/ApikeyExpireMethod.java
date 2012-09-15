@@ -18,6 +18,7 @@ package com.ecwid.mailchimp.method.security;
 import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
+ * See http://apidocs.mailchimp.com/api/1.3/apikeyexpire.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
