@@ -23,7 +23,11 @@ import java.lang.annotation.Target;
 
 
 /**
- * Abstract class representing MailChimp API call.
+ * Abstract class representing MailChimp API calls.
+ * <p>
+ * Only a limited number of MailChimp API methods have wrappers in the current version of ecwid-mailchimp.
+ * If you need to wrap a method which is not in the list,
+ * you can easily create the wrapper by extending this class.
  *
  * @param R type of the method call result
  * 

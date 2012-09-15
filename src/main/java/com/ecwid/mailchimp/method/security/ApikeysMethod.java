@@ -13,33 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.list;
+package com.ecwid.mailchimp.method.security;
 
 import com.ecwid.mailchimp.MailChimpMethod;
-import com.ecwid.mailchimp.MailChimpObject;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/listupdatemember.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/apikeys.func.php
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@MailChimpMethod.Name("listUpdateMember")
-public class ListUpdateMember extends HasListIdMethod<Boolean> {
+@MailChimpMethod.Name("apikeys")
+public class ApikeysMethod extends HasUsernameAndPasswordMethod<ApikeyInfo[]> {
+	@Field
+	public Boolean expired;
 
-	@Field
-	public String email_address;
-	
-	@Field
-	public MailChimpObject merge_vars;
-	
-	@Field
-	public EmailType email_type;
-	
-	@Field
-	public Boolean replace_interests;
-	
 	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
+	public Class<ApikeyInfo[]> getResultType() {
+		return ApikeyInfo[].class;
 	}
 }

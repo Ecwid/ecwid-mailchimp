@@ -137,6 +137,9 @@ class MailChimpGsonFactory {
 		}
 	}
 
+	/**
+	 * Creates a new {@link Gson} object.
+	 */
 	public static Gson createGson() {
 		GsonBuilder builder = new GsonBuilder();
 		builder.setExclusionStrategies(exclusionStrategy);

@@ -21,7 +21,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * Represents JSON-object as map.
+ * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public final class MailChimpMap extends MailChimpObject implements Map<String, Object> {
@@ -86,5 +87,27 @@ public final class MailChimpMap extends MailChimpObject implements Map<String, O
 	@Override
 	public Set<Entry<String, Object>> entrySet() {
 		return peer.entrySet();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		hash = 29 * hash + (this.peer != null ? this.peer.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final MailChimpMap other = (MailChimpMap) obj;
+		if (this.peer != other.peer && (this.peer == null || !this.peer.equals(other.peer))) {
+			return false;
+		}
+		return true;
 	}
 }
