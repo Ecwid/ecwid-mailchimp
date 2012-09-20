@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.security;
+package com.ecwid.mailchimp.method.list;
 
-import com.ecwid.mailchimp.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpObject;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/apikeys.func.php
- * 
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@MailChimpMethod.Name("apikeys")
-public class ApikeysMethod extends HasUsernameAndPasswordMethod<ApikeysResult> {
+public class InterestGroup extends MailChimpObject {
 	@Field
-	public Boolean expired;
+	public String bit;
 
-	@Override
-	public Class<ApikeysResult> getResultType() {
-		return ApikeysResult.class;
-	}
+	@Field
+	public String name;
+
+	@Field
+	public String display_order;
+
+	@Field
+	public Integer subscribers;
 }

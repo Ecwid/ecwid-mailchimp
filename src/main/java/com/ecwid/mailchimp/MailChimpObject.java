@@ -15,14 +15,14 @@
  */
 package com.ecwid.mailchimp;
 
+import com.google.gson.JsonParseException;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -77,7 +77,7 @@ public abstract class MailChimpObject {
 
 		for(Class<?> c=getClass(); MailChimpObject.class.isAssignableFrom(c); c=c.getSuperclass()) {
 			for(java.lang.reflect.Field f: c.getDeclaredFields()) {
-				if(f.isAnnotationPresent(Field.class)) {
+				if(f.isAnnotationPresent(Field.class) && !Modifier.isStatic(f.getModifiers())) {
 					f.setAccessible(true);
 					try {
 						result.add(f.get(this));
@@ -102,7 +102,18 @@ public abstract class MailChimpObject {
 	 * Deserializes an object from JSON.
 	 */
 	public static <T extends MailChimpObject> T fromJson(String json, Class<T> clazz) {
-		return MailChimpGsonFactory.createGson().fromJson(json, clazz);
+		try {
+			return MailChimpGsonFactory.createGson().fromJson(json, clazz);
+		} catch(JsonParseException e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	/**
+	 * Converts this object to a map.
+	 */
+	public MailChimpMap asMap() {
+		return fromJson(toJson(), MailChimpMap.class);
 	}
 
 	/**

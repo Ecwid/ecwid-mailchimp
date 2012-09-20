@@ -96,6 +96,13 @@ public final class MailChimpMap extends MailChimpObject implements Map<String, O
 		return hash;
 	}
 
+	/**
+	 * Converts this map to a regular MailChimp object.
+	 */
+	public <T extends MailChimpObject> T as(Class<T> clazz) {
+		return fromJson(toJson(), clazz);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

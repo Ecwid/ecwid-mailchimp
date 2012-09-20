@@ -15,6 +15,7 @@
  */
 package com.ecwid.mailchimp;
 
+import java.util.Date;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -24,14 +25,17 @@ import org.testng.annotations.Test;
  */
 public class MailChimpObjectTest {
 
-	private class TestBase extends MailChimpObject {
+	private static class TestBase extends MailChimpObject {
 		@Field
 		String f1;
 	}
 
-	private class TestObject extends TestBase {
+	private static class TestObject extends TestBase {
 		@Field
 		int f2;
+
+		@Field
+		Date f3;
 
 		String ignored;
 	}
@@ -60,9 +64,6 @@ public class MailChimpObjectTest {
 
 	@Test
 	public void testEqualsAndHashCode_sameClass() {
-		class Test1 extends TestObject { }
-		class Test2 extends TestObject { }
-
 		TestObject t1 = new TestObject();
 		TestObject t2 = new TestObject();
 		assertEqual(t1, t2);
