@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -122,7 +121,7 @@ public class InterestGroupingMethodsTest extends AbstractMethodTestCase {
 		ListSubscribeMethod subscribeMethod = new ListSubscribeMethod();
 		subscribeMethod.apikey = apiKey;
 		subscribeMethod.id = listId;
-		subscribeMethod.email_address = "vasya-pupkin@gmail.com";
+		subscribeMethod.email_address = email(33);
 		subscribeMethod.double_optin = false;
 		subscribeMethod.send_welcome = false;
 		subscribeMethod.update_existing = true;
@@ -159,7 +158,7 @@ public class InterestGroupingMethodsTest extends AbstractMethodTestCase {
 		assertEquals(infoResult.data.size(), 1);
 
 		mv = infoResult.data.get(0).merges.as(MergeVars.class);
-		assertEquals(mv.EMAIL, "vasya-pupkin@gmail.com");
+		assertEquals(mv.EMAIL, email(33));
 		assertEquals(mv.FNAME, "Vasya");
 		assertEquals(mv.LNAME, "Pupkin");
 		
