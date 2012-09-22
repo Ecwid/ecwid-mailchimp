@@ -15,6 +15,7 @@
  */
 package com.ecwid.mailchimp;
 
+import com.ecwid.mailchimp.internal.gson.MailChimpGsonFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

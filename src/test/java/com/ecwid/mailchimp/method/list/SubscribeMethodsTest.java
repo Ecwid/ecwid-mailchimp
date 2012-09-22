@@ -36,9 +36,13 @@ public class SubscribeMethodsTest extends AbstractMethodTestCase {
 	private final String apiKey;
 	private final String listId;
 	
-	private class MergeVars extends MailChimpObject {
+	private static class MergeVars extends MailChimpObject {
 		@MailChimpObject.Field
 		private final String EMAIL, FNAME, LNAME;
+
+		private MergeVars() {
+			this(null, null, null);
+		}
 
 		public MergeVars(String email, String fname, String lname) {
 			this.EMAIL = email;
