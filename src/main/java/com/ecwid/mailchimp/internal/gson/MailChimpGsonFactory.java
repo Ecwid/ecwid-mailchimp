@@ -44,24 +44,21 @@ import java.util.TimeZone;
 public class MailChimpGsonFactory {
 	
 	private MailChimpGsonFactory() { }
-	
+
+	/**
+	 * Excludes every field in any class.
+	 * Only instances of {@link MailChimpObject} can be serialized
+	 * (see {@link MailChimpObjectTypeAdapter}).
+	 */
 	private static final ExclusionStrategy exclusionStrategy = new ExclusionStrategy() {
 		@Override
 		public boolean shouldSkipField(FieldAttributes fa) {
-			return fa.getAnnotation(MailChimpObject.Field.class) == null;
+			return true;
 		}
 
 		@Override
 		public boolean shouldSkipClass(Class<?> type) {
 			return false;
-		}
-	};
-	
-	private static FieldNamingStrategy fieldNamingStrategy = new FieldNamingStrategy() {
-		@Override
-		public String translateName(Field field) {
-			String name = field.getAnnotation(MailChimpObject.Field.class).name();
-			return name.isEmpty()? field.getName() : name;
 		}
 	};
 
@@ -103,7 +100,6 @@ public class MailChimpGsonFactory {
 	public static Gson createGson() {
 		GsonBuilder builder = new GsonBuilder();
 		builder.setExclusionStrategies(exclusionStrategy);
-		builder.setFieldNamingStrategy(fieldNamingStrategy);
 		builder.registerTypeAdapter(Date.class, new DateTypeAdapter());
 		builder.registerTypeAdapterFactory(MailChimpObjectTypeAdapter.FACTORY);
 		return builder.create();

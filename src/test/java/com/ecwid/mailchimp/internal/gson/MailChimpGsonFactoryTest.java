@@ -16,6 +16,8 @@
 package com.ecwid.mailchimp.internal.gson;
 
 import com.ecwid.mailchimp.MailChimpObject;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.sql.Timestamp;
@@ -32,29 +34,52 @@ import org.testng.annotations.Test;
  */
 public class MailChimpGsonFactoryTest {
 
+	private static class PlainOldObject {
+		@Expose(serialize=true, deserialize=true) // has no effect
+		String ignored = "ignored";
+	}
+
 	private static class TestObject extends MailChimpObject {
 		@Field
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		Date date;
 
 		@Field
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		Timestamp timestamp;
 
 		@Field
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		Integer integer;
 
 		@Field
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		MailChimpObject object;
 
 		@Field
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		TestObject child;
 
 		@Field(name="children_array")
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		TestObject array[];
 
 		@Field(name="children_list")
+		@Expose(serialize=false, deserialize=false) // has no effect
+		@SerializedName("hasNoEffect") // has no effect
 		List<TestObject> list;
 
-		String ignored;
+		@Field
+		PlainOldObject plainOldObject;
+
+		@Expose(serialize=true, deserialize=true) // has no effect
+		String ignored = "ignored";
 	}
 
 	@Test
@@ -73,10 +98,10 @@ public class MailChimpGsonFactoryTest {
 		o.array[0].integer = 111;
 		o.list = Arrays.asList(new TestObject());
 		o.list.get(0).integer = 222;
-		o.ignored = "ignored";
+		o.plainOldObject = new PlainOldObject();
 
 		JsonObject json = gson.toJsonTree(o).getAsJsonObject();
-		assertEquals(json.entrySet().size(), 7);
+		assertEquals(json.entrySet().size(), 8);
 		assertEquals(json.get("date").getAsString(), "1970-01-01 00:00:00");
 		assertEquals(json.get("timestamp").getAsString(), "1970-01-01 00:00:00");
 		assertEquals(json.get("integer").getAsInt(), 666);
@@ -84,8 +109,10 @@ public class MailChimpGsonFactoryTest {
 		assertEquals(json.get("child").getAsJsonObject().get("integer").getAsInt(), 555);
 		assertEquals(json.get("children_array").getAsJsonArray().get(0).getAsJsonObject().get("integer").getAsInt(), 111);
 		assertEquals(json.get("children_list").getAsJsonArray().get(0).getAsJsonObject().get("integer").getAsInt(), 222);
+		assertEquals(json.get("plainOldObject").getAsJsonObject().entrySet().size(), 0);
 		assertNull(json.get("ignored"));
 		json.addProperty("ignored", "really ignored?");
+		json.get("plainOldObject").getAsJsonObject().addProperty("ignored", "really ignored?");
 
 		o = gson.fromJson(json, TestObject.class);
 		assertEquals(o.date, new Date(0));
@@ -95,46 +122,8 @@ public class MailChimpGsonFactoryTest {
 		assertEquals((int) o.child.integer, 555);
 		assertEquals((int) o.array[0].integer, 111);
 		assertEquals((int) o.list.get(0).integer, 222);
-		assertNull(o.ignored);
-	}
-	
-	private static class PlainOldObject {
-		@MailChimpObject.Field
-		Date date;
-		
-		@MailChimpObject.Field
-		Timestamp timestamp;
-
-		@MailChimpObject.Field(name = "email_address")
-		String email;
-		
-		String unserializable;
-	}
-
-	@Test
-	public void testSerialization_PlainOld() {
-		Gson gson = MailChimpGsonFactory.createGson();
-		
-		PlainOldObject o = new PlainOldObject();
-		o.email = "pupkin@gmail.com";
-		o.date = new Date(0);
-		o.timestamp = new Timestamp(0);
-		o.unserializable = "Unserializable";
-		
-		JsonObject json = gson.toJsonTree(o).getAsJsonObject();
-		assertEquals(json.entrySet().size(), 3);
-		assertEquals(json.get("date").getAsString(), "1970-01-01 00:00:00");
-		assertEquals(json.get("timestamp").getAsString(), "1970-01-01 00:00:00");
-		assertEquals(json.get("email_address").getAsString(), "pupkin@gmail.com");
-		assertNull(json.get("unserializable"));
-		
-		json.addProperty("unserializable", "Unserializable");
-		
-		o = gson.fromJson(json, PlainOldObject.class);
-		assertEquals(o.date, new Date(0));
-		assertEquals(o.timestamp, new Timestamp(0));
-		assertEquals(o.email, "pupkin@gmail.com");
-		assertNull(o.unserializable);
+		assertEquals(o.ignored, "ignored");
+		assertEquals(o.plainOldObject.ignored, "ignored");
 	}
 
 	@Test
