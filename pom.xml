@@ -34,10 +34,10 @@ limitations under the License.
 	<url>https://github.com/Ecwid/ecwid-mailchimp</url>
 	<inceptionYear>2012</inceptionYear>
 
-    <organization>
-        <name>Ecwid, Inc</name>
-        <url>http://www.ecwid.com/</url>
-    </organization>
+	<organization>
+		<name>Ecwid, Inc</name>
+		<url>http://www.ecwid.com/</url>
+	</organization>
     
 	<developers>
 		<developer>
@@ -66,19 +66,10 @@ limitations under the License.
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<test.properties.file>${project.build.testOutputDirectory}/mailchimp.test.properties</test.properties.file>
 	</properties>
 
 	<build>
-		<testResources>
-			<testResource>
-				<directory>${project.build.testSourceDirectory}</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/*.properties</include>
-				</includes>
-			</testResource>
-		</testResources>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -99,7 +90,7 @@ limitations under the License.
 					<systemPropertyVariables>
 						<java.util.logging.config.file>${project.build.testOutputDirectory}/logging.properties</java.util.logging.config.file>
 					</systemPropertyVariables>
-					<systemPropertiesFile>${project.build.testOutputDirectory}/mailchimp.test.properties</systemPropertiesFile>
+					<systemPropertiesFile>${test.properties.file}</systemPropertiesFile>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -109,6 +100,24 @@ limitations under the License.
 				<configuration>
 					<excludePackageNames>*.internal</excludePackageNames>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echoproperties prefix="mailchimp.test." destfile="${test.properties.file}"/>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
