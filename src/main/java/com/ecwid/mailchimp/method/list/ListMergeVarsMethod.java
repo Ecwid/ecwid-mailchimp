@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.security;
+package com.ecwid.mailchimp.method.list;
 
 import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/apikeyexpire.func.php
- *
+ * See http://apidocs.mailchimp.com/api/1.3/listmergevars.func.php
+ * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@MailChimpMethod.Name("apikeyExpire")
-public class ApikeyExpireMethod extends HasUsernameAndPasswordMethod<Boolean> {
+@MailChimpMethod.Name("listMergeVars")
+public class ListMergeVarsMethod extends HasListIdMethod<ListMergeVarsResult> {
+
 	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
+	public Class<ListMergeVarsResult> getResultType() {
+		return ListMergeVarsResult.class;
 	}
 }

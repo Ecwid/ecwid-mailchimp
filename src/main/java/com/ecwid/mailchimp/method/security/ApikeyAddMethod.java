@@ -20,6 +20,7 @@ import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
  * See http://apidocs.mailchimp.com/api/1.3/apikeyadd.func.php
+ *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Name("apikeyAdd")

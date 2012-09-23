@@ -13,19 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.security;
-
-import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/apikeyexpire.func.php
- *
- * @author Vasily Karyaev <v.karyaev@gmail.com>
+ * Internal utilities.
  */
-@MailChimpMethod.Name("apikeyExpire")
-public class ApikeyExpireMethod extends HasUsernameAndPasswordMethod<Boolean> {
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
-}
+package com.ecwid.mailchimp.internal;

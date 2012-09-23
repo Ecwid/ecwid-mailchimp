@@ -16,40 +16,65 @@
 package com.ecwid.mailchimp.method.list;
 
 import com.ecwid.mailchimp.MailChimpObject;
-import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MemberInfo extends MailChimpObject {
-	@Field
-	public String id;
-	
-	@Field
-	public String email;
-	
-	@Field
-	public EmailType email_type;
-	
-	@Field
-	public MailChimpObject merges;
-	
-	@Field
-	public MemberStatus status;
-	
-	@Field
-	public Date timestamp;
-	
-	/**
-	 * This field indicates email, associated with {@link #error}.
-	 */
-	@Field
-	public String email_address;
+public class MergeVarInfo extends MailChimpObject {
 
 	/**
-	 * Error message.
+	 * Not used in {@link ListMergeVarAddMethod} requests.
 	 */
 	@Field
-	public String error;
+	public String tag;
+
+	/**
+	 * Not used in {@link ListMergeVarAddMethod} requests.
+	 */
+	@Field
+	public String name;
+
+	@Field
+	public Boolean req;
+
+	@Field
+	public MergeVarType field_type;
+
+	@Field(name="public")
+	public Boolean public_;
+
+	@Field
+	public Boolean show;
+
+	@Field
+	public Integer order;
+
+	@Field(name="default")
+	public String default_;
+
+	@Field
+	public Integer size;
+
+	@Field
+	public List<String> choices;
+
+	/**
+	 * Not set in responses.
+	 */
+	@Field
+	public String dateformat;
+
+	/**
+	 * Not set in responses.
+	 */
+	@Field
+	public String phoneformat;
+
+	/**
+	 * Not set in responses.
+	 */
+	@Field
+	public String defaultcountry;
 }

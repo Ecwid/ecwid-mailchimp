@@ -16,6 +16,9 @@
 package com.ecwid.mailchimp.method;
 
 import com.ecwid.mailchimp.MailChimpClient;
+import java.util.ArrayList;
+import java.util.List;
+import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 
 /**
@@ -23,10 +26,25 @@ import org.testng.annotations.AfterClass;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class AbstractMethodTestCase {
+	protected static final int MAX_EMAILS = 50;
+
 	protected final MailChimpClient client = new MailChimpClient();
 
 	@AfterClass
 	private void afterClass() {
 		client.close();
+	}
+
+	protected List<String> emails(int from, int count) {
+		List<String> result = new ArrayList<String>();
+		for(int i=from; i<from+count; i++) {
+			result.add(email(i));
+		}
+		return result;
+	}
+
+	protected String email(int i) {
+		assertTrue(i >= 0 && i < MAX_EMAILS, ""+i);
+		return "test+"+i+"@gmail.com";
 	}
 }

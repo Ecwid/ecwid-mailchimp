@@ -23,12 +23,12 @@ import com.ecwid.mailchimp.MailChimpMethod;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Name("apikeys")
-public class ApikeysMethod extends HasUsernameAndPasswordMethod<ApikeyInfo[]> {
+public class ApikeysMethod extends HasUsernameAndPasswordMethod<ApikeysResult> {
 	@Field
 	public Boolean expired;
 
 	@Override
-	public Class<ApikeyInfo[]> getResultType() {
-		return ApikeyInfo[].class;
+	public Class<ApikeysResult> getResultType() {
+		return ApikeysResult.class;
 	}
 }

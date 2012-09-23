@@ -13,19 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp.method.security;
+package com.ecwid.mailchimp.method.list;
 
 import com.ecwid.mailchimp.MailChimpMethod;
+import java.util.List;
 
 /**
- * See http://apidocs.mailchimp.com/api/1.3/apikeyexpire.func.php
+ * See http://apidocs.mailchimp.com/api/1.3/listinterestgroupingadd.func.php
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-@MailChimpMethod.Name("apikeyExpire")
-public class ApikeyExpireMethod extends HasUsernameAndPasswordMethod<Boolean> {
+@MailChimpMethod.Name("listInterestGroupingAdd")
+public class ListInterestGroupingAddMethod extends HasListIdMethod<Integer> {
+
+	@Field
+	public String name;
+
+	@Field
+	public InterestGroupingType type;
+
+	@Field
+	public List<String> groups;
+
 	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
+	public Class<Integer> getResultType() {
+		return Integer.class;
 	}
 }
