@@ -51,7 +51,7 @@ public class MailChimpClient implements Closeable {
 	 * through the specified connection manager.
 	 * <p>
 	 * Use this constructor if the {@linkplain DefaultConnectionManager default connection manager}
-	 * is not suitable (for instance, in GAE environment).
+	 * is not suitable (for instance, in GAE environment use {@linkplain PlainURLConnectionManager plain connection manager}).
 	 * 
 	 * @param connection connection manager to be used to access the service point
 	 */
