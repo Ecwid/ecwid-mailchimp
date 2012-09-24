@@ -134,6 +134,10 @@ public class MailChimpClient implements Closeable {
 	 */
 	@Override
 	public void close() {
-		connection.close();
+		try {
+			connection.close();
+		} catch(IOException e) {
+			log.log(Level.WARNING, "Could not close connection", e);
+		}
 	}
 }

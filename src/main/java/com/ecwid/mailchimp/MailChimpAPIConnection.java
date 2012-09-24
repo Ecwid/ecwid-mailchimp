@@ -37,10 +37,4 @@ public interface MailChimpAPIConnection extends Closeable {
 	 * or if the service point response was unsuccessful (>= 300 status code)
 	 */
 	public String post(String url, String payload) throws IOException;
-
-	/**
-	 * Release resources associated with the connection.
-	 */
-	@Override
-	public void close();
 }
