@@ -1,8 +1,8 @@
 package com.ecwid.mailchimp.connection;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -12,7 +12,7 @@ import java.net.URL;
  * 
  * @author James Broberg <jbroberg@gmail.com>
  */
-public class PlainURLConnectionManager implements MailChimpConnectionManager  {
+public class JavaNetURLConnectionManager implements MailChimpConnectionManager  {
 	private HttpURLConnection conn = null;
 
 	@Override
@@ -22,21 +22,20 @@ public class PlainURLConnectionManager implements MailChimpConnectionManager  {
         conn = (HttpURLConnection) mcUrl.openConnection();
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
-		
-		conn.addRequestProperty("Content-Type", "application/" + "POST");
-		conn.setRequestProperty("Content-Length", Integer.toString(payload.length()));
-		conn.getOutputStream().write(payload.getBytes("UTF8"));
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				(conn.getInputStream())));
- 
-		String output = "";
-		StringBuilder sbResponse = new StringBuilder();
-		while ((output = br.readLine()) != null) {
-			sbResponse.append(output + "\n");
+		byte bytes[] = payload.getBytes("UTF-8");
+		conn.addRequestProperty("Content-Type", "application/json; charset=utf-8");
+		conn.setRequestProperty("Content-Length", Integer.toString(bytes.length));
+		conn.getOutputStream().write(bytes);
+		
+		Reader reader = new InputStreamReader(conn.getInputStream(), "UTF-8");
+		StringBuilder sb = new StringBuilder();
+		char buf[] = new char[4096];
+		int cnt;
+		while ((cnt = reader.read(buf)) >= 0) {
+			sb.append(buf, 0, cnt);
 		}
- 
-		return sbResponse.toString();
+		return sb.toString();
 	}
 	
 	@Override

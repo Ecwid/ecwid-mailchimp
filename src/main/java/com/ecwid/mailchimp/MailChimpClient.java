@@ -16,6 +16,7 @@
 package com.ecwid.mailchimp;
 
 import com.ecwid.mailchimp.connection.DefaultConnectionManager;
+import com.ecwid.mailchimp.connection.JavaNetURLConnectionManager;
 import com.ecwid.mailchimp.connection.MailChimpConnectionManager;
 import com.ecwid.mailchimp.internal.gson.MailChimpGsonFactory;
 import com.google.gson.Gson;
@@ -51,7 +52,7 @@ public class MailChimpClient implements Closeable {
 	 * through the specified connection manager.
 	 * <p>
 	 * Use this constructor if the {@linkplain DefaultConnectionManager default connection manager}
-	 * is not suitable (for instance, in GAE environment use {@linkplain PlainURLConnectionManager plain connection manager}).
+	 * is not suitable. For instance, in GAE environment use {@link JavaNetURLConnectionManager}).
 	 * 
 	 * @param connection connection manager to be used to access the service point
 	 */
@@ -63,7 +64,7 @@ public class MailChimpClient implements Closeable {
 		if(log.isLoggable(Level.FINE)) {
 			log.fine("Post to "+url+" : "+request);
 		}
-		String response = connection.post(url, request);
+		String response = connection.post(url, URLEncoder.encode(request, "UTF-8"));
 		if(log.isLoggable(Level.FINE)) {
 			log.fine("Response: "+response);
 		}

@@ -35,7 +35,7 @@ public class DefaultConnectionManager implements MailChimpConnectionManager {
 	@Override
 	public String post(String url, String payload) throws IOException {
 		HttpPost post = new HttpPost(url);
-		post.setEntity(new StringEntity(URLEncoder.encode(payload, "UTF-8")));
+		post.setEntity(new StringEntity(payload));
 		return http.execute(post, new BasicResponseHandler());
 	}
 
