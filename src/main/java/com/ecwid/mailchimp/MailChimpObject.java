@@ -59,7 +59,7 @@ public class MailChimpObject extends AbstractMap<String, Object> implements Seri
 	@Documented
 	@Retention(value = RetentionPolicy.RUNTIME)
 	@Target(value = ElementType.FIELD)
-	public @interface Field {
+	protected @interface Field {
 		/**
 		 * Property name in JSON mapping.
 		 * If not specified, the field name will be used.
