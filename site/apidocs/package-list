@@ -1,3 +1,4 @@
 com.ecwid.mailchimp
+com.ecwid.mailchimp.connection
 com.ecwid.mailchimp.method.list
 com.ecwid.mailchimp.method.security
