@@ -46,6 +46,13 @@ limitations under the License.
 		</developer>
 	</developers>
 
+	<contributors>
+		<contributor>
+			<name>James Broberg</name>
+			<email>jbroberg@gmail.com</email>
+		</contributor>
+	</contributors>
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
