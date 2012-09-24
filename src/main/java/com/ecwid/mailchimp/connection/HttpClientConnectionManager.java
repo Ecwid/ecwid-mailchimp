@@ -24,12 +24,12 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
- * Default implementation of {@link MailChimpConnectionManager}
+ * Implementation of {@link MailChimpConnectionManager}
  * which uses Apache HttpClient library to access MailChimp API service point.
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class DefaultConnectionManager implements MailChimpConnectionManager {
+public class HttpClientConnectionManager implements MailChimpConnectionManager {
 	private final HttpClient http = new DefaultHttpClient();
 
 	@Override

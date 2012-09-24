@@ -22,7 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Alternate implementation of {@link MailChimpConnectionManager}
+ * Implementation of {@link MailChimpConnectionManager}
  * which uses standard java.net.* libraries to access MailChimp API service point.
  * 
  * @author James Broberg <jbroberg@gmail.com>

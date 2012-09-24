@@ -15,7 +15,7 @@
  */
 package com.ecwid.mailchimp;
 
-import com.ecwid.mailchimp.connection.DefaultConnectionManager;
+import com.ecwid.mailchimp.connection.HttpClientConnectionManager;
 import com.ecwid.mailchimp.connection.JavaNetURLConnectionManager;
 import com.ecwid.mailchimp.connection.MailChimpConnectionManager;
 import com.ecwid.mailchimp.internal.gson.MailChimpGsonFactory;
@@ -40,19 +40,20 @@ public class MailChimpClient implements Closeable {
 	private final MailChimpConnectionManager connection;
 
 	/**
-	 * Construct a {@code MailChimpClient} object accessing MailChimp API service point
-	 * through the {@linkplain DefaultConnectionManager default connection manager}.
+	 * Constructs a {@code MailChimpClient} object accessing MailChimp API service point
+	 * through the default connection manager (currently {@link HttpClientConnectionManager}).
 	 */
 	public MailChimpClient() {
-		this(new DefaultConnectionManager());
+		this(new HttpClientConnectionManager());
 	}
 
 	/**
-	 * Construct a {@code MailChimpClient} object accessing MailChimp API service point
+	 * Constructs a {@code MailChimpClient} object accessing MailChimp API service point
 	 * through the specified connection manager.
 	 * <p>
-	 * Use this constructor if the {@linkplain DefaultConnectionManager default connection manager}
-	 * is not suitable. For instance, in GAE environment use {@link JavaNetURLConnectionManager}).
+	 * Use this constructor if the default connection manager
+	 * (currently {@link HttpClientConnectionManager}) is not suitable. 
+	 * For instance, in GAE environment you should use {@link JavaNetURLConnectionManager} instead.
 	 * 
 	 * @param connection connection manager to be used to access the service point
 	 */
