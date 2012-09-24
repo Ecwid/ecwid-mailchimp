@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecwid.mailchimp;
+package com.ecwid.mailchimp.connection;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.io.IOException;
  * 
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public interface MailChimpAPIConnection extends Closeable {
+public interface MailChimpConnectionManager extends Closeable {
 	
 	/**
 	 * Make a POST request to MailChimp API service point.

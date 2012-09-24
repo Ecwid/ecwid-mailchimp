@@ -15,6 +15,8 @@
  */
 package com.ecwid.mailchimp;
 
+import com.ecwid.mailchimp.connection.DefaultConnectionManager;
+import com.ecwid.mailchimp.connection.MailChimpConnectionManager;
 import com.ecwid.mailchimp.internal.gson.MailChimpGsonFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -25,11 +27,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
  * MailChimp API wrapper.
@@ -39,38 +36,27 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class MailChimpClient implements Closeable {
 	private static final Logger log = Logger.getLogger(MailChimpClient.class.getName());
 	
-	private final MailChimpAPIConnection connection;
+	private final MailChimpConnectionManager connection;
 
 	/**
 	 * Construct a {@code MailChimpClient} object accessing MailChimp API service point
-	 * through the specified connection manager.
-	 * 
-	 * @param connection connection manager to be used to access the service point
+	 * through the {@linkplain DefaultConnectionManager default connection manager}.
 	 */
-	public MailChimpClient(MailChimpAPIConnection connection) {
-		this.connection = connection;
+	public MailChimpClient() {
+		this(new DefaultConnectionManager());
 	}
 
 	/**
 	 * Construct a {@code MailChimpClient} object accessing MailChimp API service point
-	 * through the default connection manager (based on Apache HttpClient library).
+	 * through the specified connection manager.
+	 * <p>
+	 * Use this constructor if the {@linkplain DefaultConnectionManager default connection manager}
+	 * is not suitable (for instance, in GAE environment).
+	 * 
+	 * @param connection connection manager to be used to access the service point
 	 */
-	public MailChimpClient() {
-		this(new MailChimpAPIConnection() {
-			final HttpClient http = new DefaultHttpClient();
-	
-			@Override
-			public String post(String url, String payload) throws IOException {
-				HttpPost post = new HttpPost(url);
-				post.setEntity(new StringEntity(URLEncoder.encode(payload, "UTF-8")));
-				return http.execute(post, new BasicResponseHandler());
-			}
-
-			@Override
-			public void close() {
-				http.getConnectionManager().shutdown();
-			}
-		});
+	public MailChimpClient(MailChimpConnectionManager connection) {
+		this.connection = connection;
 	}
 	
 	private String execute(String url, String request) throws IOException {
