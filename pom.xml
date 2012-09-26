@@ -129,6 +129,30 @@ limitations under the License.
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>skip-integration-tests</id>
+			<activation>
+				<property>
+					<name>!mailchimp.test.apikey</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>com/ecwid/mailchimp/method/*/*.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
