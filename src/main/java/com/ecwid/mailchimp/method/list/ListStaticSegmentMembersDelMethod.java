@@ -11,7 +11,7 @@ import java.util.List;
 public class ListStaticSegmentMembersDelMethod extends HasListIdMethod<ListStaticSegmentMembersResult>
 {
 	@Field
-	public String seg_id;
+	public Integer seg_id;
 
 	@Field
 	public List<String> batch;
