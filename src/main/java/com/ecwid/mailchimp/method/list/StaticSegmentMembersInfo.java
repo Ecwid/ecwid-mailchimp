@@ -8,7 +8,7 @@ import java.util.List;
 /**
  *
  */
-public class StaticSegmentMembersAddInfo extends MailChimpObject
+public class StaticSegmentMembersInfo extends MailChimpObject
 {
     @Field
     public Integer suc;

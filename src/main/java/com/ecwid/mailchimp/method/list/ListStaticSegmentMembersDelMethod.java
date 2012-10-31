@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 @MailChimpMethod.Name("listStaticSegmentMembersDel")
-public class ListStaticSegmentMembersDelMethod extends HasListIdMethod<ListStaticSegmentMembersResult>
+public class ListStaticSegmentMembersDelMethod extends HasListIdMethod<StaticSegmentMembersInfo>
 {
 	@Field
 	public Integer seg_id;
@@ -21,8 +21,8 @@ public class ListStaticSegmentMembersDelMethod extends HasListIdMethod<ListStati
      * Get the class object representing method result type.
      */
     @Override
-    public Class<ListStaticSegmentMembersResult> getResultType()
+    public Class<StaticSegmentMembersInfo> getResultType()
     {
-        return ListStaticSegmentMembersResult.class;
+        return StaticSegmentMembersInfo.class;
     }
 }

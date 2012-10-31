@@ -5,6 +5,6 @@ import java.util.ArrayList;
 /**
  *
  */
-public class ListStaticSegmentMembersResult extends ArrayList<StaticSegmentMembersAddInfo>
+public class ListStaticSegmentMembersResult extends ArrayList<StaticSegmentMembersInfo>
 {
 }
