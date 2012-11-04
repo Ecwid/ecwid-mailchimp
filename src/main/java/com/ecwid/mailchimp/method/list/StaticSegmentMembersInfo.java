@@ -11,7 +11,7 @@ import java.util.List;
 public class StaticSegmentMembersInfo extends MailChimpObject
 {
     @Field
-    public Integer suc;
+    public Integer success;
 
     @Field
     public List<StaticSegmentMembersAddErrors> errors;
