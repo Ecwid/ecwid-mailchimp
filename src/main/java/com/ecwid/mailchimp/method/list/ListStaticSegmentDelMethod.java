@@ -9,7 +9,7 @@ import com.ecwid.mailchimp.MailChimpMethod;
 public class ListStaticSegmentDelMethod extends HasListIdMethod<Boolean>
 {
 	@Field
-	public String seg_id;
+	public Integer seg_id;
 
 
     /**
