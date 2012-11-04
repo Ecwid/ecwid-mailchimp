@@ -17,8 +17,10 @@ public class CampaignCreateMethod extends CampaingRelatedMethod<String>
 {
     @Field
     public String type;
-    @Field
-    public Map<String, Object> options;
+	@Field
+	public Map<String, Object> options;
+	@Field
+	public Map<String, Object> segment_opts;
     @Field
     public Map<String, String> content;
 
