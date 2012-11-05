@@ -1,6 +1,8 @@
 package com.ecwid.mailchimp.method.campaign;
 
 import com.ecwid.mailchimp.MailChimpMethod;
+import com.ecwid.mailchimp.MailChimpObject;
+
 import java.util.Map;
 
 /**
@@ -18,11 +20,11 @@ public class CampaignCreateMethod extends CampaingRelatedMethod<String>
     @Field
     public String type;
 	@Field
-	public Map<String, Object> options;
+	public MailChimpObject options;
 	@Field
-	public Map<String, Object> segment_opts;
+	public MailChimpObject segment_opts;
     @Field
-    public Map<String, String> content;
+    public MailChimpObject content;
 
 
     /**
