@@ -86,7 +86,7 @@ public class MailChimpGsonFactory {
 		public Date deserialize(JsonElement je, Type type, JsonDeserializationContext jdc) throws JsonParseException {
 			synchronized(format) {
 				try {
-					return format.parse(je.getAsString());
+					return !je.getAsString().isEmpty()? format.parse(je.getAsString()) : null;
 				} catch(ParseException e) {
 					throw new IllegalArgumentException("Cannot deserialize date: "+je);
 				}

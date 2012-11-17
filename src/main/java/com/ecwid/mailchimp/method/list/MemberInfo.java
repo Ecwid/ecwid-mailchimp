@@ -39,7 +39,34 @@ public class MemberInfo extends MailChimpObject {
 	public MemberStatus status;
 	
 	@Field
+	public String ip_signup;
+	
+	@Field
+	public Date timestamp_signup;
+
+	@Field
+	public String ip_opt;
+	
+	@Field
+	public Date timestamp_opt;
+
+	@Field
+	public Integer member_rating;
+	
+	@Field
+	public String campaign_id;
+	
+	@Field
 	public Date timestamp;
+	
+	@Field
+	public Date info_changed;
+	
+	@Field
+	public Integer web_id;
+	
+	@Field
+	public Boolean is_gmonkey;
 	
 	/**
 	 * This field indicates email, associated with {@link #error}.
