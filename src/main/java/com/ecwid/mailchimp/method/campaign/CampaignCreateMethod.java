@@ -18,7 +18,7 @@ import java.util.Map;
 public class CampaignCreateMethod extends CampaingRelatedMethod<String>
 {
     @Field
-    public String type;
+    public CampaignType type;
 	@Field
 	public MailChimpObject options;
 	@Field
