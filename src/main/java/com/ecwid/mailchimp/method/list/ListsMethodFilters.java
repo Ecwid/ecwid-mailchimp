@@ -15,32 +15,31 @@
  */
  package com.ecwid.mailchimp.method.list;
 
- import com.ecwid.mailchimp.MailChimpMethod;
+ import com.ecwid.mailchimp.MailChimpObject;
 
-/**
- * See http://apidocs.mailchimp.com/api/1.3/lists.func.php
- *
- * @author Matt Farmer <matt@frmr.me>
- */
-@MailChimpMethod.Name("lists")
-public class ListsMethod extends MailChimpMethod<ListsResult> {
+ /**
+  *
+  * @author Matt Farmer <matt@frmr.me>
+  */
+public class ListsMethodFilters extends MailChimpObject {
   @Field
-  public ListsMethodFilters filters = null;
+  public String list_id;
 
   @Field
-  public Integer start = null;
+  public String list_name;
 
   @Field
-  public Integer limit = null;
+  public String from_name;
 
   @Field
-  public String sort_field = null;
+  public String from_subject;
 
   @Field
-  public String sort_dir = null;
+  public String created_before;
 
-  @Override
-  public Class<ListsResult> getResultType() {
-    return ListsResult.class;
-  }
+  @Field
+  public String created_after;
+
+  @Field
+  public Boolean exact;
 }

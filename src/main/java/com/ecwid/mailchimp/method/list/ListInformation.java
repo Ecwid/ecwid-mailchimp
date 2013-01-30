@@ -26,7 +26,7 @@ public class ListInformation extends MailChimpObject {
   public String id;
 
   @Field
-  public int web_id;
+  public Integer web_id;
 
   @Field
   public String name;
@@ -35,10 +35,10 @@ public class ListInformation extends MailChimpObject {
   public String date_created;
 
   @Field
-  public boolean email_type_option;
+  public Boolean email_type_option;
 
   @Field
-  public boolean use_awesomebar;
+  public Boolean use_awesomebar;
 
   @Field
   public String default_from_name;
@@ -53,7 +53,7 @@ public class ListInformation extends MailChimpObject {
   public String default_language;
 
   @Field
-  public double list_rating;
+  public Double list_rating;
 
   @Field
   public String subscribe_url_short;

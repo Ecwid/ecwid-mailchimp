@@ -23,47 +23,47 @@ import com.ecwid.mailchimp.MailChimpObject;
  */
 public class ListStats extends MailChimpObject {
   @Field
-  public double member_count;
+  public Double member_count;
 
   @Field
-  public double unsubscribe_count;
+  public Double unsubscribe_count;
 
   @Field
-  public double cleaned_count;
+  public Double cleaned_count;
 
   @Field
-  public double member_count_since_send;
+  public Double member_count_since_send;
 
   @Field
-  public double unsubscribe_count_since_send;
+  public Double unsubscribe_count_since_send;
 
   @Field
-  public double cleaned_count_since_send;
+  public Double cleaned_count_since_send;
 
   @Field
-  public double campaign_count;
+  public Double campaign_count;
 
   @Field
-  public double grouping_count;
+  public Double grouping_count;
 
   @Field
-  public double group_count;
+  public Double group_count;
 
   @Field
-  public double merge_var_count;
+  public Double merge_var_count;
 
   @Field
-  public double avg_sub_rate;
+  public Double avg_sub_rate;
 
   @Field
-  public double avg_unsub_rate;
+  public Double avg_unsub_rate;
 
   @Field
-  public double target_sub_rate;
+  public Double target_sub_rate;
 
   @Field
-  public double open_rate;
+  public Double open_rate;
 
   @Field
-  public double click_rate;
+  public Double click_rate;
 }

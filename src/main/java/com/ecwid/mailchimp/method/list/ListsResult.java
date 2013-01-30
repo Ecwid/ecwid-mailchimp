@@ -23,5 +23,8 @@ import java.util.List;
  */
 public class ListsResult extends MailChimpObject {
   @Field
+  public Integer total;
+
+  @Field
   public List<ListInformation> data;
 }
