@@ -27,9 +27,6 @@ import com.ecwid.mailchimp.MailChimpMethod;
 public class GetAccountDetailsMethod extends MailChimpMethod<AccountDetails> {
 
 	@Field
-	public String apikey;
-	
-	@Field
 	public List<String> exclude;
 	
 	@Override
