@@ -21,7 +21,7 @@ import com.ecwid.mailchimp.MailChimpObject;
 /**
  * See http://apidocs.mailchimp.com/api/1.3/getaccountdetails.func.php
  * 
- * @author Vasily Karyaev <v.karyaev@gmail.com>
+ * @author Matt Farmer <matt@frmr.me>
  */
 public class AccountDetails extends MailChimpObject {
 	@Field
