@@ -32,5 +32,6 @@ public class AccountModuleDetails extends MailChimpObject {
 	@Field
 	public String added;
 
-	// Data key value pairs?
+	@Field
+	public MailChimpObject data;
 }

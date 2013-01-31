@@ -85,5 +85,5 @@ public class AccountDetails extends MailChimpObject {
 	public List<AccountOrderDetails> orders;
 
 	@Field
-	public List<AccountRewardDetails> rewards;
+	public AccountRewardDetails rewards;
 }
