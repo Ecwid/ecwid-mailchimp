@@ -15,6 +15,7 @@
  */
  package com.ecwid.mailchimp.method.list;
 
+ import java.util.Date;
  import com.ecwid.mailchimp.MailChimpObject;
 
  /**
@@ -35,10 +36,10 @@ public class ListsMethodFilters extends MailChimpObject {
   public String from_subject;
 
   @Field
-  public String created_before;
+  public Date created_before;
 
   @Field
-  public String created_after;
+  public Date created_after;
 
   @Field
   public Boolean exact;

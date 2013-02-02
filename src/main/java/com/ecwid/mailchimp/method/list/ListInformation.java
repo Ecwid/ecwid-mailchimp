@@ -15,6 +15,7 @@
  */
 package com.ecwid.mailchimp.method.list;
 
+import java.util.Date;
 import com.ecwid.mailchimp.MailChimpObject;
 
 /**
@@ -32,7 +33,7 @@ public class ListInformation extends MailChimpObject {
   public String name;
 
   @Field
-  public String date_created;
+  public Date date_created;
 
   @Field
   public Boolean email_type_option;
