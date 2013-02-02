@@ -15,6 +15,7 @@
  */
 package com.ecwid.mailchimp.method.helper;
 
+import java.util.Date;
 import com.ecwid.mailchimp.MailChimpObject;
 
 /**
@@ -30,7 +31,7 @@ public class AccountRewardReferral extends MailChimpObject {
 	public String email;
 
 	@Field
-	public String signup_date;
+	public Date signup_date;
 
 	@Field
 	public String type;

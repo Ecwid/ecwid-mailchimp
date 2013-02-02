@@ -16,6 +16,7 @@
 package com.ecwid.mailchimp.method.helper;
 
 import java.util.List;
+import java.util.Date;
 import com.ecwid.mailchimp.MailChimpObject;
 
 /**
@@ -52,7 +53,7 @@ public class AccountDetails extends MailChimpObject {
 	public Integer plan_high;
 
 	@Field
-	public String plan_start_date;
+	public Date plan_start_date;
 
 	@Field
 	public Integer emails_left;
@@ -61,16 +62,16 @@ public class AccountDetails extends MailChimpObject {
 	public Boolean pending_monthly;
 
 	@Field
-	public String first_payment;
+	public Date first_payment;
 
 	@Field
-	public String last_payment;
+	public Date last_payment;
 
 	@Field
 	public Integer times_logged_in;
 
 	@Field
-	public String last_login;
+	public Date last_login;
 
 	@Field
 	public String affiliate_link;

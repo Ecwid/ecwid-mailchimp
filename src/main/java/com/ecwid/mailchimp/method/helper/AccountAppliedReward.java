@@ -15,6 +15,7 @@
  */
 package com.ecwid.mailchimp.method.helper;
 
+import java.util.Date;
 import com.ecwid.mailchimp.MailChimpObject;
 
 /**
@@ -27,7 +28,7 @@ public class AccountAppliedReward extends MailChimpObject {
 	public Integer value;
 
 	@Field
-	public String date;
+	public Date date;
 
 	@Field
 	public Integer order_id;

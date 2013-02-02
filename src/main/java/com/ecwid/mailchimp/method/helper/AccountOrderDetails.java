@@ -15,6 +15,7 @@
  */
 package com.ecwid.mailchimp.method.helper;
 
+import java.util.Date;
 import com.ecwid.mailchimp.MailChimpObject;
 
 /**
@@ -33,7 +34,7 @@ public class AccountOrderDetails extends MailChimpObject {
 	public Double amount;
 
 	@Field
-	public String date;
+	public Date date;
 
 	@Field
 	public Double credits_used;
