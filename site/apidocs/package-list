@@ -4,3 +4,4 @@ com.ecwid.mailchimp.method.campaign
 com.ecwid.mailchimp.method.helper
 com.ecwid.mailchimp.method.list
 com.ecwid.mailchimp.method.security
+com.ecwid.mailchimp.method.template
