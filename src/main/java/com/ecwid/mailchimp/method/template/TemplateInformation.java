@@ -23,7 +23,7 @@ import com.ecwid.mailchimp.MailChimpObject;
  */
 public class TemplateInformation extends MailChimpObject {
 	  @Field
-	  public String id;
+	  public Integer id;
 
 	  @Field
 	  public String name;
