@@ -3,7 +3,7 @@ package com.ecwid.mailchimp.method.list;
 import com.ecwid.mailchimp.MailChimpMethod;
 
 /**
- *
+ * See http://apidocs.mailchimp.com/api/1.3/liststaticsegments.func.php
  */
 @MailChimpMethod.Name("listStaticSegments")
 public class ListStaticSegmentsMethod extends HasListIdMethod<ListStaticSegmentsResult>

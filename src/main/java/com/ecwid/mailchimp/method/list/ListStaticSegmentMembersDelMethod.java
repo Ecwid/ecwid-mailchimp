@@ -5,7 +5,7 @@ import com.ecwid.mailchimp.MailChimpMethod;
 import java.util.List;
 
 /**
- *
+ * See http://apidocs.mailchimp.com/api/1.3/liststaticsegmentmembersdel.func.php
  */
 @MailChimpMethod.Name("listStaticSegmentMembersDel")
 public class ListStaticSegmentMembersDelMethod extends HasListIdMethod<StaticSegmentMembersInfo>

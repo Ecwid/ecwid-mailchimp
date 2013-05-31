@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * See:
  * <a href="http://apidocs.mailchimp.com/api/1.3/campaignsegmenttest.func.php">
- *      http://apidocs.mailchimp.com/api/1.3/campaignsegment.func.php
+ *      http://apidocs.mailchimp.com/api/1.3/campaignsegmenttest.func.php
  * </a>
  *
  * @author Massimo Lusetti <mlusetti@gmail.com>

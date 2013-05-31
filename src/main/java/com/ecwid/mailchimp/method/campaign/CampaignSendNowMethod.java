@@ -6,8 +6,8 @@ import java.util.Map;
 
 /**
  * See:
- * <a href="http://apidocs.mailchimp.com/api/1.3/campaigncreate.func.php">
- *      http://apidocs.mailchimp.com/api/1.3/campaigncreate.func.php
+ * <a href="http://apidocs.mailchimp.com/api/1.3/campaignsendnow.func.php">
+ *      http://apidocs.mailchimp.com/api/1.3/campaignsendnow.func.php
  * </a>
  *
  * @author Massimo Lusetti <mlusetti@gmail.com>
