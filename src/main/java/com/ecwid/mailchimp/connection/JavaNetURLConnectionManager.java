@@ -28,7 +28,25 @@ import java.net.URL;
  * @author James Broberg <jbroberg@gmail.com>
  */
 public class JavaNetURLConnectionManager implements MailChimpConnectionManager  {
+
+    private static int DEFAULT_TIMEOUT = 5000;
+
 	private HttpURLConnection conn = null;
+
+    // Timeout in ms when trying to connect to MC
+    private int connectTimeout;
+    // Timeout in ms when waiting for the response
+    private int readTimeout;
+
+
+    public JavaNetURLConnectionManager() {
+        this(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
+    }
+
+    public  JavaNetURLConnectionManager(int connectTimeout, int readTimeout) {
+        this.connectTimeout = connectTimeout;
+        this.readTimeout = readTimeout;
+    }
 
 	@Override
 	public String post(String url, String payload) throws IOException {
@@ -36,6 +54,8 @@ public class JavaNetURLConnectionManager implements MailChimpConnectionManager  
         URL mcUrl = new URL(url);
         conn = (HttpURLConnection) mcUrl.openConnection();
 		conn.setDoOutput(true);
+        conn.setConnectTimeout(connectTimeout);
+        conn.setReadTimeout(readTimeout);
 		conn.setRequestMethod("POST");
 
 		byte bytes[] = payload.getBytes("UTF-8");
@@ -59,4 +79,20 @@ public class JavaNetURLConnectionManager implements MailChimpConnectionManager  
 			conn.disconnect();
 		}		
 	}
+
+    public int getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public int getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+    }
 }
