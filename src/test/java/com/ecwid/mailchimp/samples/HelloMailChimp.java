@@ -83,5 +83,9 @@ public class HelloMailChimp {
 		ListMemberInfoResult listMemberInfoResult = mailChimpClient.execute(listMemberInfoMethod);
 		MemberInfo info = listMemberInfoResult.data.get(0);
 		System.out.println(info.email+"'s status is "+info.status);
+
+		// Close http-connection when the MailChimpClient object is not needed any longer.
+		// Generally the close method should be called from a "finally" block.
+		mailChimpClient.close();
 	}
 }
