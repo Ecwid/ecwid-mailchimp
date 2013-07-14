@@ -36,10 +36,20 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 
 	private final HttpClient http = new DefaultHttpClient();
 
+	/**
+	 * Constructor.
+	 * Equivalent to calling {@link #HttpClientConnectionManager(int, int)} with both parameters set to 15000 (15 seconds).
+	 */
 	public HttpClientConnectionManager() {
 		this(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @param connectTimeout the timeout (in milliseconds) when trying to connect to the remote server
+	 * @param readTimeout the timeout (in milliseconds) when when waiting for the response from the remote server
+	 */
 	public HttpClientConnectionManager(int connectTimeout, int readTimeout) {
 		setConnectTimeout(connectTimeout);
 		setReadTimeout(readTimeout);

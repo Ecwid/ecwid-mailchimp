@@ -33,16 +33,23 @@ public class JavaNetURLConnectionManager implements MailChimpConnectionManager  
 
 	private HttpURLConnection conn = null;
 
-	// Timeout in ms when trying to connect to MC
 	private int connectTimeout;
-	// Timeout in ms when waiting for the response
 	private int readTimeout;
 
-
+	/**
+	 * Constructor.
+	 * Equivalent to calling {@link #JavaNetURLConnectionManager(int, int)} with both parameters set to 15000 (15 seconds).
+	 */
 	public JavaNetURLConnectionManager() {
 		this(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @param connectTimeout the timeout (in milliseconds) when trying to connect to the remote server
+	 * @param readTimeout the timeout (in milliseconds) when when waiting for the response from the remote server
+	 */
 	public  JavaNetURLConnectionManager(int connectTimeout, int readTimeout) {
 		this.connectTimeout = connectTimeout;
 		this.readTimeout = readTimeout;
