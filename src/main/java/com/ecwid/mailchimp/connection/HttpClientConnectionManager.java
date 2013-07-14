@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 
 /**
  * Implementation of {@link MailChimpConnectionManager}
@@ -30,7 +31,19 @@ import org.apache.http.impl.client.DefaultHttpClient;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 public class HttpClientConnectionManager implements MailChimpConnectionManager {
+
+	private static final int DEFAULT_TIMEOUT = 15000;
+
 	private final HttpClient http = new DefaultHttpClient();
+
+	public HttpClientConnectionManager() {
+		this(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
+	}
+
+	public HttpClientConnectionManager(int connectTimeout, int readTimeout) {
+		setConnectTimeout(connectTimeout);
+		setReadTimeout(readTimeout);
+	}
 
 	@Override
 	public String post(String url, String payload) throws IOException {
@@ -42,5 +55,21 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 	@Override
 	public void close() {
 		http.getConnectionManager().shutdown();
+	}
+
+	public int getConnectTimeout() {
+		return HttpConnectionParams.getConnectionTimeout(http.getParams());
+	}
+
+	public void setConnectTimeout(int connectTimeout) {
+		HttpConnectionParams.setConnectionTimeout(http.getParams(), connectTimeout);
+	}
+
+	public int getReadTimeout() {
+		return HttpConnectionParams.getSoTimeout(http.getParams());
+	}
+
+	public void setReadTimeout(int readTimeout) {
+		HttpConnectionParams.setSoTimeout(http.getParams(), readTimeout);
 	}
 }
