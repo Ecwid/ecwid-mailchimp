@@ -28,21 +28,41 @@ import java.net.URL;
  * @author James Broberg <jbroberg@gmail.com>
  */
 public class JavaNetURLConnectionManager implements MailChimpConnectionManager  {
+
+	private static final int DEFAULT_TIMEOUT = 15000;
+
 	private HttpURLConnection conn = null;
+
+	// Timeout in ms when trying to connect to MC
+	private int connectTimeout;
+	// Timeout in ms when waiting for the response
+	private int readTimeout;
+
+
+	public JavaNetURLConnectionManager() {
+		this(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
+	}
+
+	public  JavaNetURLConnectionManager(int connectTimeout, int readTimeout) {
+		this.connectTimeout = connectTimeout;
+		this.readTimeout = readTimeout;
+	}
 
 	@Override
 	public String post(String url, String payload) throws IOException {
 
-        URL mcUrl = new URL(url);
-        conn = (HttpURLConnection) mcUrl.openConnection();
+		URL mcUrl = new URL(url);
+		conn = (HttpURLConnection) mcUrl.openConnection();
 		conn.setDoOutput(true);
+		conn.setConnectTimeout(connectTimeout);
+		conn.setReadTimeout(readTimeout);
 		conn.setRequestMethod("POST");
 
 		byte bytes[] = payload.getBytes("UTF-8");
 		conn.addRequestProperty("Content-Type", "application/json; charset=utf-8");
 		conn.setRequestProperty("Content-Length", Integer.toString(bytes.length));
 		conn.getOutputStream().write(bytes);
-		
+
 		Reader reader = new InputStreamReader(conn.getInputStream(), "UTF-8");
 		StringBuilder sb = new StringBuilder();
 		char buf[] = new char[4096];
@@ -52,11 +72,27 @@ public class JavaNetURLConnectionManager implements MailChimpConnectionManager  
 		}
 		return sb.toString();
 	}
-	
+
 	@Override
 	public void close() throws IOException {
 		if (conn != null) {
 			conn.disconnect();
-		}		
+		}
+	}
+
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
+
+	public void setConnectTimeout(int connectTimeout) {
+		this.connectTimeout = connectTimeout;
+	}
+
+	public int getReadTimeout() {
+		return readTimeout;
+	}
+
+	public void setReadTimeout(int readTimeout) {
+		this.readTimeout = readTimeout;
 	}
 }
