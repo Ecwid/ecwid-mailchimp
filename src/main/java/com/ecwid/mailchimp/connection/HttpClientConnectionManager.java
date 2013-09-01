@@ -16,13 +16,14 @@
 package com.ecwid.mailchimp.connection;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.util.EntityUtils;
 
 /**
  * Implementation of {@link MailChimpConnectionManager}
@@ -58,8 +59,13 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 	@Override
 	public String post(String url, String payload) throws IOException {
 		HttpPost post = new HttpPost(url);
-		post.setEntity(new StringEntity(payload));
-		return http.execute(post, new BasicResponseHandler());
+		post.setEntity(new StringEntity(payload, "UTF-8"));
+		HttpResponse response = http.execute(post);
+		if (response.getEntity() != null) {
+			return EntityUtils.toString(response.getEntity(), "UTF-8").trim();
+		} else {
+			throw new IOException(response.getStatusLine().toString());
+		}
 	}
 
 	@Override

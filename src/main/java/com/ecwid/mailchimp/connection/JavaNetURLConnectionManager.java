@@ -16,6 +16,7 @@
 package com.ecwid.mailchimp.connection;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
@@ -70,7 +71,8 @@ public class JavaNetURLConnectionManager implements MailChimpConnectionManager  
 		conn.setRequestProperty("Content-Length", Integer.toString(bytes.length));
 		conn.getOutputStream().write(bytes);
 
-		Reader reader = new InputStreamReader(conn.getInputStream(), "UTF-8");
+		InputStream is = conn.getResponseCode() == 200? conn.getInputStream() : conn.getErrorStream();
+		Reader reader = new InputStreamReader(is, "UTF-8");
 		StringBuilder sb = new StringBuilder();
 		char buf[] = new char[4096];
 		int cnt;

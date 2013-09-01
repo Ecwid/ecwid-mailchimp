@@ -61,19 +61,26 @@ public class MailChimpClient implements Closeable {
 		this.connection = connection;
 	}
 	
-	private String execute(String url, String request) throws IOException {
+	private String execute(String url, String request, MailChimpAPIVersion version) throws IOException {
 		if(log.isLoggable(Level.FINE)) {
 			log.fine("Post to "+url+" : "+request);
 		}
-		String response = connection.post(url, URLEncoder.encode(request, "UTF-8"));
+		
+		if (version.compareTo(MailChimpAPIVersion.v2_0) < 0) {
+			// MailChimp API v1.3 required the post data be urlencoded.
+			request = URLEncoder.encode(request, "UTF-8");
+		}
+		
+		String response = connection.post(url, request);
 		if(log.isLoggable(Level.FINE)) {
 			log.fine("Response: "+response);
 		}
+		
 		return response;
 	}
 	
-	private JsonElement execute(String url, JsonElement request) throws IOException {
-		return new JsonParser().parse(execute(url, request.toString()));
+	private JsonElement execute(String url, JsonElement request, MailChimpAPIVersion version) throws IOException {
+		return new JsonParser().parse(execute(url, request.toString(), version));
 	}
 	
 	/**
@@ -85,7 +92,7 @@ public class MailChimpClient implements Closeable {
 	public <R> R execute(MailChimpMethod<R> method) throws IOException, MailChimpException {
 		final Gson gson = MailChimpGsonFactory.createGson();
 
-		JsonElement result = execute(buildUrl(method), gson.toJsonTree(method));
+		JsonElement result = execute(buildUrl(method), gson.toJsonTree(method), method.getMetaInfo().version());
 		if(result.isJsonObject()) {
 			JsonElement error = result.getAsJsonObject().get("error");		
 			if(error != null) {
@@ -109,11 +116,23 @@ public class MailChimpClient implements Closeable {
 			throw new IllegalArgumentException("Wrong apikey: "+apikey);
 		}
 		
+		MailChimpMethod.Method metaInfo = method.getMetaInfo();
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("https://");
 		sb.append(prefix);
-		sb.append(".api.mailchimp.com/1.3/?method=");
-		sb.append(URLEncoder.encode(method.getMethodName(), "UTF-8"));
+		sb.append(".api.mailchimp.com/");
+		sb.append(metaInfo.version()).append("/");
+		if (metaInfo.version().compareTo(MailChimpAPIVersion.v2_0) < 0) {
+			// API version 1.3
+			sb.append("?method=").append(metaInfo.name());
+			sb.append("&output=json");
+		} else {
+			// API version 2.0 or higher
+			sb.append(metaInfo.name());
+			sb.append(".json");
+		}
+		
 		return sb.toString();
 	}
 	
