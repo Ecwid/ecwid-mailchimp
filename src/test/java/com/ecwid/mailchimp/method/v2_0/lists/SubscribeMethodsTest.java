@@ -191,18 +191,4 @@ public class SubscribeMethodsTest extends AbstractMethodTestCase {
 		log.info("Result: " + result);
 		return result;
 	}
-	
-	private Email email_v2_0(int i) {
-		Email result = new Email();
-		result.email = email(i);
-		return result;
-	}
-	
-	private List<Email> emails_v2_0(int from, int count) {
-		List<Email> result = new ArrayList<Email>();
-		for(int i=from; i<from+count; i++) {
-			result.add(email_v2_0(i));
-		}
-		return result;
-	}
 }

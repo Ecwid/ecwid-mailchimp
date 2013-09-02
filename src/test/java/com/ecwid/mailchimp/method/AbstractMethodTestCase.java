@@ -16,6 +16,7 @@
 package com.ecwid.mailchimp.method;
 
 import com.ecwid.mailchimp.MailChimpClient;
+import com.ecwid.mailchimp.method.v2_0.lists.Email;
 import java.util.ArrayList;
 import java.util.List;
 import static org.testng.Assert.*;
@@ -46,5 +47,19 @@ public class AbstractMethodTestCase {
 	protected String email(int i) {
 		assertTrue(i >= 0 && i < MAX_EMAILS, ""+i);
 		return "test+"+i+"@gmail.com";
+	}
+	
+	protected Email email_v2_0(int i) {
+		Email result = new Email();
+		result.email = email(i);
+		return result;
+	}
+	
+	protected List<Email> emails_v2_0(int from, int count) {
+		List<Email> result = new ArrayList<Email>();
+		for(int i=from; i<from+count; i++) {
+			result.add(email_v2_0(i));
+		}
+		return result;
 	}
 }

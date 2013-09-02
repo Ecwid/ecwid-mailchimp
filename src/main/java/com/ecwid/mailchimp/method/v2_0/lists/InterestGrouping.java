@@ -16,67 +16,23 @@
 package com.ecwid.mailchimp.method.v2_0.lists;
 
 import com.ecwid.mailchimp.MailChimpObject;
-import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
-public class MemberInfoData extends MailChimpObject {
-	@Field
-	public String id;
-	
-	@Field
-	public String email;
-	
-	@Field
-	public String email_type;
-	
-	@Field
-	public MemberInfoMerges merges;
-	
-	@Field
-	public String status;
-	
-	@Field
-	public String ip_signup;
-	
-	@Field
-	public Date timestamp_signup;
+public class InterestGrouping extends MailChimpObject {
 
 	@Field
-	public String ip_opt;
-	
-	@Field
-	public Date timestamp_opt;
+	public Integer id;
 
 	@Field
-	public Integer member_rating;
-	
+	public String name;
+
 	@Field
-	public String campaign_id;
-	
+	public String form_field;
+
 	@Field
-	public Date timestamp;
-	
-	@Field
-	public Date info_changed;
-	
-	@Field
-	public Integer web_id;
-	
-	@Field
-	public String leid;
-	
-	@Field
-	public String list_id;
-	
-	@Field
-	public String list_name;
-	
-	@Field
-	public String language;
-	
-	@Field
-	public Boolean is_gmonkey;
+	public List<InterestGroup> groups;
 }
