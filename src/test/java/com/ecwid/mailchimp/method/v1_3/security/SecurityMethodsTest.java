@@ -36,7 +36,11 @@ public class SecurityMethodsTest extends AbstractMethodTestCase {
 		this.apiKey = apiKey;
 	}
 
-	@Test
+	/**
+	 * The test is disabled since the security methods don't work anymore.
+	 * See https://groups.google.com/forum/#!msg/mailchimp-api-discuss/JQL8K4FxsoM/qWDoCpkV-CsJ .
+	 */
+	@Test(enabled = false)
 	public void test() throws Exception {
 		ApikeyAddMethod apikeyAddMethod = new ApikeyAddMethod();
 		apikeyAddMethod.apikey = apiKey;
