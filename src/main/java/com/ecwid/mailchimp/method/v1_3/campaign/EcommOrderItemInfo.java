@@ -4,10 +4,10 @@ import com.ecwid.mailchimp.MailChimpObject;
 
 public class EcommOrderItemInfo extends MailChimpObject {
 	@Field
-	public int line_num;
+	public Integer line_num;
 	
 	@Field
-	public int product_id;
+	public Integer product_id;
 	
 	@Field
 	public String sku;
@@ -16,14 +16,14 @@ public class EcommOrderItemInfo extends MailChimpObject {
 	public String product_name;
 	
 	@Field
-	public int category_id;
+	public Integer category_id;
 	
 	@Field
 	public String category_name;
 	
 	@Field
-	public double qty;
+	public Double qty;
 	
 	@Field
-	public double cost;
+	public Double cost;
 }
