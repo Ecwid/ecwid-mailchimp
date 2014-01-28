@@ -1,5 +1,6 @@
 package com.ecwid.mailchimp.method.v2_0.ecomm;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ecwid.mailchimp.MailChimpObject;
@@ -16,16 +17,16 @@ public class OrderInfo extends MailChimpObject {
 	public String email_id;
 	
 	@Field
-	public double total;
+	public Double total;
 	
 	@Field
-	public String order_date;
+	public Date order_date;
 	
 	@Field
-	public double shipping;
+	public Double shipping;
 	
 	@Field
-	public double tax;
+	public Double tax;
 	
 	@Field
 	public String store_id;
