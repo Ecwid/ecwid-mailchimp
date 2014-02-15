@@ -24,9 +24,4 @@ import com.ecwid.mailchimp.MailChimpMethod;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Method(name = "apikeyExpire", version = MailChimpAPIVersion.v1_3)
-public class ApikeyExpireMethod extends HasUsernameAndPasswordMethod<Boolean> {
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
-}
+public class ApikeyExpireMethod extends HasUsernameAndPasswordMethod<Boolean> { }

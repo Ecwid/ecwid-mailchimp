@@ -14,15 +14,4 @@ import com.ecwid.mailchimp.MailChimpMethod;
  *
  */
 @MailChimpMethod.Method(name = "campaignDelete", version = MailChimpAPIVersion.v1_3)
-public class CampaignDeleteMethod extends CampaingRelatedMethod<Boolean>
-{
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<Boolean> getResultType()
-    {
-        return Boolean.class;
-    }
-}
+public class CampaignDeleteMethod extends CampaingRelatedMethod<Boolean> { }

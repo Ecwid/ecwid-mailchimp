@@ -38,9 +38,4 @@ public class ListMembersMethod extends HasListIdMethod<ListMembersResult> {
 
 	@Field
 	public Integer limit;
-	
-	@Override
-	public Class<ListMembersResult> getResultType() {
-		return ListMembersResult.class;
-	}
 }

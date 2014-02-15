@@ -24,11 +24,7 @@ import com.ecwid.mailchimp.MailChimpMethod;
  */
 @MailChimpMethod.Method(name = "lists/members", version = MailChimpAPIVersion.v2_0)
 public class MembersMethod extends ListsRelatedMethod<MembersResult> {
+
 	@Field
 	public String status;
-
-	@Override
-	public Class<MembersResult> getResultType() {
-		return MembersResult.class;
-	}
 }

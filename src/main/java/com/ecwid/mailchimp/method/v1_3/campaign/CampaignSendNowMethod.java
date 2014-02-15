@@ -14,14 +14,4 @@ import com.ecwid.mailchimp.MailChimpMethod;
  *
  */
 @MailChimpMethod.Method(name = "campaignSendNow", version = MailChimpAPIVersion.v1_3)
-public class CampaignSendNowMethod extends CampaingRelatedMethod<Boolean>
-{
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<Boolean> getResultType()
-    {
-        return Boolean.class;
-    }
-}
+public class CampaignSendNowMethod extends CampaingRelatedMethod<Boolean> { }

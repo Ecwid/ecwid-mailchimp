@@ -15,24 +15,16 @@ import com.ecwid.mailchimp.MailChimpObject;
  *
  */
 @MailChimpMethod.Method(name = "campaignCreate", version = MailChimpAPIVersion.v1_3)
-public class CampaignCreateMethod extends CampaingRelatedMethod<String>
-{
-    @Field
-    public CampaignType type;
+public class CampaignCreateMethod extends CampaingRelatedMethod<String> {
+	@Field
+	public CampaignType type;
+
 	@Field
 	public MailChimpObject options;
+
 	@Field
 	public MailChimpObject segment_opts;
-    @Field
-    public MailChimpObject content;
 
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<String> getResultType()
-    {
-        return String.class;
-    }
+	@Field
+	public MailChimpObject content;
 }

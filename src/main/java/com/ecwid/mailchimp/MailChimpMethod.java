@@ -15,11 +15,17 @@
  */
 package com.ecwid.mailchimp;
 
+import com.google.common.reflect.TypeToken;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 
 
 /**
@@ -53,6 +59,8 @@ public abstract class MailChimpMethod<R> extends MailChimpObject {
 		public String name();
 	}
 
+	private final TypeToken<R> resultTypeToken = new TypeToken<R>(getClass()) { };
+
 	/**
 	 * API key to access MailChimp service.
 	 */
@@ -77,7 +85,14 @@ public abstract class MailChimpMethod<R> extends MailChimpObject {
 	}
 	
 	/**
-	 * Get the class object representing method result type.
+	 * Get the method result type.
 	 */
-	public abstract Class<R> getResultType();
+	public final Type getResultType() {
+		Type type = resultTypeToken.getType();
+		if (type instanceof Class || type instanceof ParameterizedType || type instanceof GenericArrayType) {
+			return type;
+		} else {
+			throw new IllegalArgumentException("Cannot resolve result type: "+resultTypeToken);
+		}
+	}
 }

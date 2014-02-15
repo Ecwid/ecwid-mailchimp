@@ -24,10 +24,4 @@ import com.ecwid.mailchimp.MailChimpMethod;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Method(name = "listMergeVars", version = MailChimpAPIVersion.v1_3)
-public class ListMergeVarsMethod extends HasListIdMethod<ListMergeVarsResult> {
-
-	@Override
-	public Class<ListMergeVarsResult> getResultType() {
-		return ListMergeVarsResult.class;
-	}
-}
+public class ListMergeVarsMethod extends HasListIdMethod<ListMergeVarsResult> { }

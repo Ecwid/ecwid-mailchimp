@@ -25,14 +25,10 @@ import com.ecwid.mailchimp.MailChimpMethod;
  */
 @MailChimpMethod.Method(name = "listMergeVarUpdate", version = MailChimpAPIVersion.v1_3)
 public class ListMergeVarUpdateMethod extends HasListIdMethod<Boolean> {
+
 	@Field
 	public String tag;
 
 	@Field
 	public MergeVarInfo options;
-
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }

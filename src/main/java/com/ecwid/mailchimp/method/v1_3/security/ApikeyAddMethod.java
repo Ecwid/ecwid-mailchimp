@@ -25,9 +25,4 @@ import com.ecwid.mailchimp.MailChimpMethod;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Method(name = "apikeyAdd", version = MailChimpAPIVersion.v1_3)
-public class ApikeyAddMethod extends HasUsernameAndPasswordMethod<String> {
-	@Override
-	public Class<String> getResultType() {
-		return String.class;
-	}
-}
+public class ApikeyAddMethod extends HasUsernameAndPasswordMethod<String> { }

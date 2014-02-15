@@ -20,14 +20,4 @@ public class GenerateTextFromHtmlMethod extends MailChimpMethod<String>
     public String type;
     @Field
     public String content;
-
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<String> getResultType()
-    {
-        return String.class;
-    }
 }

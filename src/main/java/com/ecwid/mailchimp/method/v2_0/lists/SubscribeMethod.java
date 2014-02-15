@@ -45,9 +45,4 @@ public class SubscribeMethod extends ListsRelatedMethod<Email> {
 	
 	@Field
 	public Boolean send_welcome;
-	
-	@Override
-	public Class<Email> getResultType() {
-		return Email.class;
-	}
 }

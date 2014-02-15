@@ -16,13 +16,4 @@ public class CampaignEcommOrderAddMethod extends MailChimpMethod<Boolean>
 {
 	@Field
 	public EcommOrderInfo order;
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<Boolean> getResultType()
-    {
-        return Boolean.class;
-    }
 }

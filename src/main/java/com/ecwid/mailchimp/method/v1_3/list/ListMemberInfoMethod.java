@@ -29,9 +29,4 @@ public class ListMemberInfoMethod extends HasListIdMethod<ListMemberInfoResult> 
 
 	@Field
 	public List<String> email_address;
-
-	@Override
-	public Class<ListMemberInfoResult> getResultType() {
-		return ListMemberInfoResult.class;
-	}
 }

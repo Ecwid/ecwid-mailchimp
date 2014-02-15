@@ -16,13 +16,4 @@ public class ListStaticSegmentMembersAddMethod extends HasListIdMethod<StaticSeg
 
 	@Field
 	public List<String> batch;
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<StaticSegmentMembersInfo> getResultType()
-    {
-        return StaticSegmentMembersInfo.class;
-    }
 }

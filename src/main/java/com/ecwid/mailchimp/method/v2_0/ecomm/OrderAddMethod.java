@@ -16,9 +16,4 @@ public class OrderAddMethod extends MailChimpMethod<DummyResult> {
 
 	@Field
 	public OrderInfo order;
-
-	@Override
-	public Class<DummyResult> getResultType() {
-		return DummyResult.class;
-	}
 }

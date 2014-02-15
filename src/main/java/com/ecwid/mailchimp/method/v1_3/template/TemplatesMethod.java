@@ -23,17 +23,12 @@ import com.ecwid.mailchimp.MailChimpMethod;
  */
 @MailChimpMethod.Method(name = "templates", version = MailChimpAPIVersion.v1_3)
 public class TemplatesMethod extends MailChimpMethod<TemplatesResult> {
-  @Field
-  public TemplatesMethodTypes types = null;
+	@Field
+	public TemplatesMethodTypes types = null;
 
-  @Field
-  public String category = null;
+	@Field
+	public String category = null;
 
-  @Field
-  public TemplatesMethodInactives inactives = null;
-
-  @Override
-  public Class<TemplatesResult> getResultType() {
-    return TemplatesResult.class;
-  }
+	@Field
+	public TemplatesMethodInactives inactives = null;
 }

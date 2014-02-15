@@ -25,11 +25,7 @@ import com.ecwid.mailchimp.MailChimpMethod;
  */
 @MailChimpMethod.Method(name = "apikeys", version = MailChimpAPIVersion.v1_3)
 public class ApikeysMethod extends HasUsernameAndPasswordMethod<ApikeysResult> {
+
 	@Field
 	public Boolean expired;
-
-	@Override
-	public Class<ApikeysResult> getResultType() {
-		return ApikeysResult.class;
-	}
 }

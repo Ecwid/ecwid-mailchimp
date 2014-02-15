@@ -35,9 +35,4 @@ public class ListInterestGroupingAddMethod extends HasListIdMethod<Integer> {
 
 	@Field
 	public List<String> groups;
-
-	@Override
-	public Class<Integer> getResultType() {
-		return Integer.class;
-	}
 }

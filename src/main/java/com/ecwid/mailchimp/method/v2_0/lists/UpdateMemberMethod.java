@@ -36,9 +36,4 @@ public class UpdateMemberMethod extends ListsRelatedMethod<Email> {
 	
 	@Field
 	public Boolean replace_interests;
-	
-	@Override
-	public Class<Email> getResultType() {
-		return Email.class;
-	}
 }

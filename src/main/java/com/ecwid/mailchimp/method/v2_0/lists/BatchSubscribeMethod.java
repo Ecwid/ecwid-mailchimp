@@ -37,9 +37,4 @@ public class BatchSubscribeMethod extends ListsRelatedMethod<BatchSubscribeResul
 	
 	@Field
 	public Boolean replace_interests;
-	
-	@Override
-	public Class<BatchSubscribeResult> getResultType() {
-		return BatchSubscribeResult.class;
-	}
 }

@@ -47,9 +47,4 @@ public class ListSubscribeMethod extends HasListIdMethod<Boolean> {
 	
 	@Field
 	public Boolean send_welcome;
-	
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }
