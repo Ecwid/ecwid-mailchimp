@@ -94,10 +94,4 @@ public class ListMethod extends CampaignRelatedMethod<ListMethodResult> {
         @Field
         public Boolean exact;
     }
-	
-    @Override
-    public Class<ListMethodResult> getResultType() {
-        return ListMethodResult.class;
-    }
-
 }

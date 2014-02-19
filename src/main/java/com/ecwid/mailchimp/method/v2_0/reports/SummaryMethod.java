@@ -26,10 +26,5 @@ import com.ecwid.mailchimp.method.v2_0.campaign.CampaignRelatedMethod;
  */
 @MailChimpMethod.Method(name = "reports/summary", version = MailChimpAPIVersion.v2_0)
 public class SummaryMethod extends CampaignRelatedMethod<SummaryMethodResult> {
-	
-    @Override
-    public Class<SummaryMethodResult> getResultType() {
-        return SummaryMethodResult.class;
-    }
 
 }
