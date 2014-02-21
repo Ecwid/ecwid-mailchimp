@@ -22,6 +22,11 @@ import com.ecwid.mailchimp.method.v2_0.campaign.CampaignRelatedMethod;
 /**
  * Retrieve relevant aggregate campaign statistics (opens, bounces, clicks, etc.)
  * 
+ * See:
+ * <a href="http://apidocs.mailchimp.com/api/2.0/reports/summary.php">
+ *      http://apidocs.mailchimp.com/api/2.0/reports/summary.php
+ * </a>
+ * 
  * @author Benjamin Warncke
  */
 @MailChimpMethod.Method(name = "reports/summary", version = MailChimpAPIVersion.v2_0)

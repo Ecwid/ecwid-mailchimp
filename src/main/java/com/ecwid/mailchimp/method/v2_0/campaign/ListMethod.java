@@ -24,10 +24,15 @@ import com.ecwid.mailchimp.MailChimpObject;
 /**
  * Get the list of campaigns and their details matching the specified filters
  * 
+ * See:
+ * <a href="http://apidocs.mailchimp.com/api/2.0/campaigns/list.php">
+ *      http://apidocs.mailchimp.com/api/2.0/campaigns/list.php
+ * </a>
+ * 
  * @author Benjamin Warncke
  */
 @MailChimpMethod.Method(name = "campaigns/list", version = MailChimpAPIVersion.v2_0)
-public class ListMethod extends CampaignRelatedMethod<ListMethodResult> {
+public class ListMethod extends MailChimpMethod<ListMethodResult> {
 
 	@Field
 	public Filters filters;
