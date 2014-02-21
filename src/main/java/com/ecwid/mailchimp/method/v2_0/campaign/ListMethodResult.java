@@ -72,7 +72,7 @@ public class ListMethodResult extends MailChimpObject {
         public Date create_time;
 
         @Field
-        public String sent_time;
+        public Date sent_time;
         
         @Field
         public String content_updated_time;
