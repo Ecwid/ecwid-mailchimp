@@ -129,7 +129,7 @@ public class ListMethodResult extends MailChimpObject {
         public Boolean timewarp;
 
         @Field
-        public String timewarp_schedule;
+        public Date timewarp_schedule;
         
         @Field
         public Tracking tracking;
