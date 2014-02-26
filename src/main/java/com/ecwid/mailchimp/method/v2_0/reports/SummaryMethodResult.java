@@ -103,22 +103,22 @@ public class SummaryMethodResult extends MailChimpObject {
         public String type;
     	
     	@Field
-        public Float open_rate;
+        public Double open_rate;
     	
     	@Field
-        public Float click_rate;
+        public Double click_rate;
     	
     	@Field
-        public Float bounce_rate;
+        public Double bounce_rate;
     	
     	@Field
-        public Float unopen_rate;
+        public Double unopen_rate;
     	
     	@Field
-        public Float unsub_rate;
+        public Double unsub_rate;
     	
     	@Field
-        public Float abuse_rate;
+        public Double abuse_rate;
     }
     
     /**
