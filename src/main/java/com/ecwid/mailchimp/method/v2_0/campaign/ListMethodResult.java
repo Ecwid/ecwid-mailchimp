@@ -58,9 +58,6 @@ public class ListMethodResult extends MailChimpObject {
 
         @Field
         public String content_type;
-        
-        @Field
-        public String content_edited_by;
 
         @Field
         public String title;
@@ -94,10 +91,7 @@ public class ListMethodResult extends MailChimpObject {
 
         @Field
         public String archive_url;
-        
-        @Field
-        public String archive_url_long;
-        
+                
         @Field
         public Integer emails_sent;
 
@@ -144,7 +138,7 @@ public class ListMethodResult extends MailChimpObject {
         public String tests_send;
 
         @Field
-        public Integer tests_remain;
+        public String tests_remain;
 
         @Field
         public String segment_text;
