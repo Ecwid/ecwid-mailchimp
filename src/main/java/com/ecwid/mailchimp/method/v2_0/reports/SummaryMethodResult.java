@@ -92,7 +92,7 @@ public class SummaryMethodResult extends MailChimpObject {
     public List<Timewarp> timewarp;
     
     @Field
-    public List<Timeseries> timeseries;
+    public List<Timeserie> timeseries;
     
     /**
      * Various rates/percentages for the account's selected industry - empty otherwise. These will vary across calls, do not use them for anything important.
@@ -184,7 +184,7 @@ public class SummaryMethodResult extends MailChimpObject {
     /**
      * If this campaign was a Timewarp campaign, an array of structs from each timezone stats exist for. Each will contain:
      */
-    public static class Timeseries extends MailChimpObject {
+    public static class Timeserie extends MailChimpObject {
     	
     	@Field
         public Integer opens;
