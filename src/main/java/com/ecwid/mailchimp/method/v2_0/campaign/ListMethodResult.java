@@ -182,33 +182,6 @@ public class ListMethodResult extends MailChimpObject {
         @Field
         public Boolean opens;
     }
-    
-    /**
-     * the segment used for the campaign - can be passed to campaigns/segment-test or campaigns/create()
-     */
-    public static class SegmentOpts extends MailChimpObject {
-    	
-    	@Field
-        public String match;
-    	
-    	@Field
-    	public List<Conditions> conditions;
-    }
-    
-    /**
-     * the segment used for the campaign - can be passed to campaigns/segment-test or campaigns/create()
-     */
-    public static class Conditions extends MailChimpObject {
-    	
-    	@Field
-        public String field;
-
-        @Field
-        public String op;
-
-        @Field
-        public String value;
-    }
 
     /**
      * the various tracking options used
