@@ -86,7 +86,7 @@ public class SummaryMethodResult extends MailChimpObject {
     public Industry industry;
 
     @Field
-    public List<Absplit> absplit;
+    public Absplit absplit;
 
     @Field
     public List<Timewarp> timewarp;
