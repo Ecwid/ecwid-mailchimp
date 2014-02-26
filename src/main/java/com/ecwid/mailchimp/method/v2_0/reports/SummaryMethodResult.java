@@ -220,7 +220,7 @@ public class SummaryMethodResult extends MailChimpObject {
     public static class Timewarp extends MailChimpObject {
     	
     	@Field
-        public String timestamp;
+        public Date timestamp;
     	
     	@Field
         public Integer emails_sent;
