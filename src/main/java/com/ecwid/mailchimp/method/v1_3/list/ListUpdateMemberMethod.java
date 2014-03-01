@@ -38,9 +38,4 @@ public class ListUpdateMemberMethod extends HasListIdMethod<Boolean> {
 	
 	@Field
 	public Boolean replace_interests;
-	
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }

@@ -39,9 +39,4 @@ public class ListsMethod extends MailChimpMethod<ListsResult> {
 
   @Field
   public String sort_dir = null;
-
-  @Override
-  public Class<ListsResult> getResultType() {
-    return ListsResult.class;
-  }
 }

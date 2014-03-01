@@ -28,9 +28,4 @@ public class ListMergeVarDelMethod extends HasListIdMethod<Boolean> {
 
 	@Field
 	public String tag;
-
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }

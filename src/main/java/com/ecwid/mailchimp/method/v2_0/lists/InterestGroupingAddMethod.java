@@ -33,9 +33,4 @@ public class InterestGroupingAddMethod extends ListsRelatedMethod<InterestGroupi
 
 	@Field
 	public List<String> groups;
-
-	@Override
-	public Class<InterestGroupingAddResult> getResultType() {
-		return InterestGroupingAddResult.class;
-	}
 }

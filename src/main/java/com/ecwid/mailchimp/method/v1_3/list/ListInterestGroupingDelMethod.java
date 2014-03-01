@@ -28,9 +28,4 @@ public class ListInterestGroupingDelMethod extends MailChimpMethod<Boolean> {
 
 	@Field
 	public Integer grouping_id;
-
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }

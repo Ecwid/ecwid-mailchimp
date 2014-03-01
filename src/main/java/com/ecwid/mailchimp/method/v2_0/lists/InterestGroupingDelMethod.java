@@ -26,9 +26,4 @@ public class InterestGroupingDelMethod extends MailChimpMethod<DummyResult> {
 
 	@Field
 	public Integer grouping_id;
-
-	@Override
-	public Class<DummyResult> getResultType() {
-		return DummyResult.class;
-	}
 }

@@ -29,9 +29,4 @@ public class GetAccountDetailsMethod extends MailChimpMethod<AccountDetails> {
 
 	@Field
 	public List<String> exclude;
-	
-	@Override
-	public Class<AccountDetails> getResultType() {
-		return AccountDetails.class;
-	}
 }

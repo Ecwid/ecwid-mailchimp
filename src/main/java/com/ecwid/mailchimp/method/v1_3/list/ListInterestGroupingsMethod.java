@@ -24,10 +24,4 @@ import com.ecwid.mailchimp.MailChimpMethod;
  * @author Vasily Karyaev <v.karyaev@gmail.com>
  */
 @MailChimpMethod.Method(name = "listInterestGroupings", version = MailChimpAPIVersion.v1_3)
-public class ListInterestGroupingsMethod extends HasListIdMethod<ListInterestGroupingsResult> {
-
-	@Override
-	public Class<ListInterestGroupingsResult> getResultType() {
-		return ListInterestGroupingsResult.class;
-	}
-}
+public class ListInterestGroupingsMethod extends HasListIdMethod<ListInterestGroupingsResult> { }

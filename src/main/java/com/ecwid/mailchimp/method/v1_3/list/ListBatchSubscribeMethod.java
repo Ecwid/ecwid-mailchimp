@@ -40,9 +40,4 @@ public class ListBatchSubscribeMethod extends HasListIdMethod<ListBatchSubscribe
 	
 	@Field
 	public Boolean replace_interests;
-	
-	@Override
-	public Class<ListBatchSubscribeResult> getResultType() {
-		return ListBatchSubscribeResult.class;
-	}
 }

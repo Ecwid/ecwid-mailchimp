@@ -33,9 +33,4 @@ public class ListMergeVarAddMethod extends HasListIdMethod<Boolean> {
 
 	@Field
 	public MergeVarInfo options;
-
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }

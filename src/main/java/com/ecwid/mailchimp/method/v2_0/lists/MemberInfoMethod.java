@@ -27,9 +27,4 @@ import java.util.List;
 public class MemberInfoMethod extends ListsRelatedMethod<MemberInfoResult> {
 	@Field
 	public List<Email> emails;
-
-	@Override
-	public Class<MemberInfoResult> getResultType() {
-		return MemberInfoResult.class;
-	}
 }

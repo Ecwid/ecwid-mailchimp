@@ -35,9 +35,4 @@ public class UnsubscribeMethod extends ListsRelatedMethod<DummyResult> {
 	
 	@Field
 	public Boolean send_notify;
-	
-	@Override
-	public Class<DummyResult> getResultType() {
-		return DummyResult.class;
-	}
 }

@@ -21,14 +21,4 @@ public class CampaignSegmentTestMethod extends MailChimpMethod<String>
 
 	@Field
     public MailChimpObject options;
-
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<String> getResultType()
-    {
-        return String.class;
-    }
 }

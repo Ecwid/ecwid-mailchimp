@@ -37,9 +37,4 @@ public class ListUnsubscribeMethod extends HasListIdMethod<Boolean> {
 	
 	@Field
 	public Boolean send_notify;
-	
-	@Override
-	public Class<Boolean> getResultType() {
-		return Boolean.class;
-	}
 }

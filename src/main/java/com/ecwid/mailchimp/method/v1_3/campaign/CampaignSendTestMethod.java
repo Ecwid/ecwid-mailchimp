@@ -23,13 +23,4 @@ public class CampaignSendTestMethod extends CampaingRelatedMethod<Boolean>
 
     @MailChimpObject.Field
     public String send_type;
-
-
-    /**
-     * Get the class object representing method result type.
-     */
-    @Override
-    public Class<Boolean> getResultType() {
-        return Boolean.class;
-    }
 }

@@ -37,9 +37,4 @@ public class BatchUnsubscribeMethod extends ListsRelatedMethod<BatchUnsubscribeR
 	
 	@Field
 	public Boolean send_notify;
-	
-	@Override
-	public Class<BatchUnsubscribeResult> getResultType() {
-		return BatchUnsubscribeResult.class;
-	}
 }

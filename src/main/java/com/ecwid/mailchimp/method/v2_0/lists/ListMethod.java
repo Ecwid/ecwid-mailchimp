@@ -42,11 +42,6 @@ public class ListMethod extends MailChimpMethod<ListMethodResult> {
     @Field
     public String sort_dir;
 
-    @Override
-    public Class<ListMethodResult> getResultType() {
-        return ListMethodResult.class;
-    }
-
     /**
      * Filters to apply to this query - all are optional:
      */

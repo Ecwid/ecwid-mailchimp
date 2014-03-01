@@ -27,9 +27,4 @@ public class InterestGroupingsMethod extends ListsRelatedMethod<InterestGrouping
 
 	@Field
 	public Boolean counts;
-	
-	@Override
-	public Class<InterestGroupingsResult> getResultType() {
-		return InterestGroupingsResult.class;
-	}
 }

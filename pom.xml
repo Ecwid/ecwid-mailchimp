@@ -26,7 +26,7 @@ limitations under the License.
   
 	<groupId>com.ecwid</groupId>
 	<artifactId>ecwid-mailchimp</artifactId>
-	<version>2.0.0.2-SNAPSHOT</version>
+	<version>2.0.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>MailChimp API Wrapper</name>
@@ -74,6 +74,11 @@ limitations under the License.
 		<contributor>
 			<name>ghais</name>
 			<url>https://github.com/ghais</url>
+		</contributor>
+		<contributor>
+			<name>Karel Stefan</name>
+			<email>karel.stefan@etnetera.cz</email>
+			<url>https://github.com/kstefan</url>
 		</contributor>
 	</contributors>
 
@@ -202,6 +207,11 @@ limitations under the License.
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>16.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>

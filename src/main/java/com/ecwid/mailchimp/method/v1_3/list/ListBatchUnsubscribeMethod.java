@@ -38,9 +38,4 @@ public class ListBatchUnsubscribeMethod extends HasListIdMethod<ListBatchUnsubsc
 	
 	@Field
 	public Boolean send_notify;
-
-	@Override
-	public Class<ListBatchUnsubscribeResult> getResultType() {
-		return ListBatchUnsubscribeResult.class;
-	}
 }
