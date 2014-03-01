@@ -29,7 +29,7 @@ public class InterestGroupAddMethod extends ListsRelatedMethod<DummyResult> {
 	public String group_name;
 
 	@Field
-	public int grouping_id;
+	public Integer grouping_id;
 
 	@Override
 	public Class<DummyResult> getResultType() {

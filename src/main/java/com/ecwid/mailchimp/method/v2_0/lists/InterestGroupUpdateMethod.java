@@ -32,7 +32,7 @@ public class InterestGroupUpdateMethod extends ListsRelatedMethod<DummyResult> {
 	public String new_name;
 
 	@Field
-	public int grouping_id;
+	public Integer grouping_id;
 
 	@Override
 	public Class<DummyResult> getResultType() {

@@ -22,14 +22,14 @@ import java.util.List;
 /**
  * @author Alexey Zhokhov <donbeave@gmail.com>
  */
-@MailChimpMethod.Method(name = "lists/interest-group-update", version = MailChimpAPIVersion.v2_0)
+@MailChimpMethod.Method(name = "lists/interest-group-del", version = MailChimpAPIVersion.v2_0)
 public class InterestGroupDelMethod extends ListsRelatedMethod<DummyResult> {
 
 	@Field
 	public String group_name;
 
 	@Field
-	public int grouping_id;
+	public Integer grouping_id;
 
 	@Override
 	public Class<DummyResult> getResultType() {
