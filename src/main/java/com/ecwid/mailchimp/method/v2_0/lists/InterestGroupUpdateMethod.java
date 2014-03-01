@@ -17,7 +17,6 @@ package com.ecwid.mailchimp.method.v2_0.lists;
 
 import com.ecwid.mailchimp.MailChimpAPIVersion;
 import com.ecwid.mailchimp.MailChimpMethod;
-import java.util.List;
 
 /**
  * @author Alexey Zhokhov <donbeave@gmail.com>
@@ -34,8 +33,4 @@ public class InterestGroupUpdateMethod extends ListsRelatedMethod<DummyResult> {
 	@Field
 	public Integer grouping_id;
 
-	@Override
-	public Class<DummyResult> getResultType() {
-		return DummyResult.class;
-	}
 }
