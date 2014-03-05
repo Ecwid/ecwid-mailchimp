@@ -58,6 +58,9 @@ public class ListMethodResult extends MailChimpObject {
 
         @Field
         public String content_type;
+        
+        @Field
+        public String content_edited_by;
 
         @Field
         public String title;
@@ -69,7 +72,7 @@ public class ListMethodResult extends MailChimpObject {
         public Date create_time;
 
         @Field
-        public Date sent_time;
+        public Date send_time;
         
         @Field
         public Date content_updated_time;
@@ -91,6 +94,9 @@ public class ListMethodResult extends MailChimpObject {
 
         @Field
         public String archive_url;
+        
+        @Field
+        public String archive_url_long;
                 
         @Field
         public Integer emails_sent;
@@ -135,10 +141,10 @@ public class ListMethodResult extends MailChimpObject {
         public Boolean is_child;
 
         @Field
-        public String tests_send;
+        public String tests_sent;
 
         @Field
-        public String tests_remain;
+        public Integer tests_remain;
 
         @Field
         public String segment_text;
@@ -147,10 +153,10 @@ public class ListMethodResult extends MailChimpObject {
         public SegmentOpts segment_opts;
 
         @Field
-        public SavedSegment saved_segment;
+        public List<SavedSegment> saved_segment;
 
         @Field
-        public List<String> type_opts;
+        public List<TypeOpts> type_opts;
 
         @Field
         public Integer comments_total;

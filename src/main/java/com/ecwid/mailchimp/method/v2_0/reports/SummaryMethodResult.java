@@ -53,7 +53,7 @@ public class SummaryMethodResult extends MailChimpObject {
     public Integer opens;
 
     @Field
-    public Date last_open; // TODO change to string?
+    public Date last_open;
     
     @Field
     public Integer unique_opens;
@@ -68,7 +68,7 @@ public class SummaryMethodResult extends MailChimpObject {
     public Integer users_who_clicked;
     
     @Field
-    public Date last_click; // TODO change to string?
+    public Date last_click;
 
     @Field
     public Integer emails_sent;
@@ -86,7 +86,7 @@ public class SummaryMethodResult extends MailChimpObject {
     public Industry industry;
 
     @Field
-    public Absplit absplit;
+    public List<Absplit> absplit;
 
     @Field
     public List<Timewarp> timewarp;
@@ -184,7 +184,7 @@ public class SummaryMethodResult extends MailChimpObject {
     /**
      * If this campaign was a Timewarp campaign, an array of structs from each timezone stats exist for. Each will contain:
      */
-    public static class Timeserie extends MailChimpObject {
+    public static class Timewarp extends MailChimpObject {
     	
     	@Field
         public Integer opens;
@@ -217,7 +217,7 @@ public class SummaryMethodResult extends MailChimpObject {
     /**
      * structs for the first 24 hours of the campaign, per-hour stats:
      */
-    public static class Timewarp extends MailChimpObject {
+    public static class Timeserie extends MailChimpObject {
     	
     	@Field
         public Date timestamp;
@@ -229,6 +229,6 @@ public class SummaryMethodResult extends MailChimpObject {
         public Integer unique_opens;
     	
     	@Field
-        public Date recipients_click;
+        public Integer recipients_click;
     }
 }
