@@ -24,5 +24,5 @@ import java.util.List;
  */
 public class MemberInfoMerges extends MailChimpObject {
 	@Field
-	List<MemberInfoGrouping> GROUPINGS;
+	public List<MemberInfoGrouping> GROUPINGS;
 }
