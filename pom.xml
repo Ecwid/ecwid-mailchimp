@@ -23,11 +23,77 @@ limitations under the License.
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
-  
+
 	<groupId>com.ecwid</groupId>
 	<artifactId>ecwid-mailchimp</artifactId>
-	<version>2.0.1.1-SNAPSHOT</version>
+
+	<!-- Deploy to S3 with "mvn deploy -DskipTests" -->
+	<version>2.0.1.1.fmaylinch-SNAPSHOT</version>
+
 	<packaging>jar</packaging>
+
+
+	<!-- Added to deploy on AWS -->
+	<repositories>
+		<repository>
+			<id>g4l-maven-s3-release-repo</id>
+			<name>S3 Release Repository</name>
+			<url>s3://g4l-repository/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>g4l-maven-s3-snapshot-repo</id>
+			<name>S3 Snapshot Repository</name>
+			<url>s3://g4l-repository/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>g4l-maven-s3-release-repo</id>
+			<name>S3 Release Repository</name>
+			<url>s3://g4l-repository/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>g4l-maven-s3-snapshot-repo</id>
+			<name>S3 Snapshot Repository</name>
+			<url>s3://g4l-repository/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>g4l-maven-s3-release-repo</id>
+			<name>S3 Release Repository</name>
+			<url>s3://g4l-repository/release</url>
+		</repository>
+		<snapshotRepository>
+			<id>g4l-maven-s3-snapshot-repo</id>
+			<name>S3 Snapshot Repository</name>
+			<url>s3://g4l-repository/snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<name>MailChimp API Wrapper</name>
 	<description>MailChimp API Wrapper for Java</description>
@@ -106,6 +172,16 @@ limitations under the License.
 	</properties>
 
 	<build>
+
+		<!-- Added to deploy on AWS -->
+		<extensions>
+			<extension>
+				<groupId>org.springframework.build.aws</groupId>
+				<artifactId>org.springframework.build.aws.maven</artifactId>
+				<version>3.0.0.RELEASE</version>
+			</extension>
+		</extensions>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
