@@ -20,7 +20,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DecompressingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
@@ -35,7 +35,7 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 
 	private static final int DEFAULT_TIMEOUT = 15000;
 
-	private final HttpClient http = new DefaultHttpClient();
+	private final HttpClient http = new DecompressingHttpClient(new DefaultHttpClient());
 
 	/**
 	 * Constructor.
