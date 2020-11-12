@@ -37,102 +37,111 @@ import java.util.Map;
  */
 class MailChimpObjectTypeAdapter extends TypeAdapter<MailChimpObject> {
 
-	static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
-		@Override
-		@SuppressWarnings("unchecked")
-		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (MailChimpObject.class.isAssignableFrom(type.getRawType())) {
-				return (TypeAdapter<T>) new MailChimpObjectTypeAdapter(gson, (TypeToken<MailChimpObject>) type);
-			} else {
-				return null;
-			}
-		}
-	};
+    static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
+        @Override
+        @SuppressWarnings("unchecked")
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (MailChimpObject.class.isAssignableFrom(type.getRawType())) {
+                return (TypeAdapter<T>) new MailChimpObjectTypeAdapter(gson, (TypeToken<MailChimpObject>) type);
+            } else {
+                return null;
+            }
+        }
+    };
 
-	private final Gson gson;
-	private final Constructor<? extends MailChimpObject> constructor;
+    private final Gson gson;
+    private final Constructor<? extends MailChimpObject> constructor;
 
-	@SuppressWarnings("unchecked")
-	private MailChimpObjectTypeAdapter(Gson gson, TypeToken<MailChimpObject> type) {
-		this.gson = gson;
+    @SuppressWarnings("unchecked")
+    private MailChimpObjectTypeAdapter(Gson gson, TypeToken<MailChimpObject> type) {
+        this.gson = gson;
 
-		try {
-			this.constructor = ((Class<? extends MailChimpObject>) type.getRawType()).getDeclaredConstructor();
-			this.constructor.setAccessible(true);
-		} catch(NoSuchMethodException e) {
-			throw new IllegalArgumentException("No no-arg counstructor found in "+type.getRawType());
-		}
-	}
+        try {
+            this.constructor = ((Class<? extends MailChimpObject>) type.getRawType()).getDeclaredConstructor();
+            this.constructor.setAccessible(true);
+        } catch(NoSuchMethodException e) {
+            throw new IllegalArgumentException("No no-arg counstructor found in "+type.getRawType());
+        }
+    }
 
-	@Override
-	public void write(JsonWriter out, MailChimpObject value) throws IOException {
-		gson.getAdapter(Map.class).write(out, value);
-	}
+    @Override
+    public void write(JsonWriter out, MailChimpObject value) throws IOException {
+        gson.getAdapter(Map.class).write(out, value);
+    }
 
-	@Override
-	public MailChimpObject read(JsonReader in) throws IOException {
-		if (in.peek() == JsonToken.NULL) {
-			in.nextNull();
-			return null;
-		}
+    @Override
+    public MailChimpObject read(JsonReader in) throws IOException {
+        if (in.peek() == JsonToken.NULL) {
+            in.nextNull();
+            return null;
+        }
 
-		MailChimpObject result;
-		try {
-			result = constructor.newInstance();
-		} catch(Exception e) {
-			throw new RuntimeException("Failed to invoke " + constructor + " with no args", e);
-		}
+        MailChimpObject result;
+        try {
+            result = constructor.newInstance();
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to invoke " + constructor + " with no args", e);
+        }
 
-		in.beginObject();
-		while (in.hasNext()) {
-			final String key;
-			if (in.peek() == JsonToken.NAME) {
-				key = in.nextName();
-			} else {
-				key = in.nextString();
-			}
+        if (in.peek() == JsonToken.BEGIN_ARRAY) {
+            in.beginArray();
+            if (in.peek() != JsonToken.END_ARRAY) {
+                throw new IllegalStateException("Expected empty array as empty mailchimp object.");
+            }
+            in.endArray();
+            return result;
+        }
 
-			final Object value;
-			
-			Type valueType = result.getReflectiveMappingTypes().get(key);
-			if (valueType != null) {
-				value = gson.getAdapter(TypeToken.get(valueType)).read(in);
-			} else {
-				if (in.peek() == JsonToken.BEGIN_OBJECT) {
-					value = gson.getAdapter(MailChimpObject.class).read(in);
-				} else if(in.peek() == JsonToken.BEGIN_ARRAY) {
-					value = readList(in);
-				} else {
-					value = gson.getAdapter(Object.class).read(in);
-				}
-			}
+        in.beginObject();
+        while (in.hasNext()) {
+            final String key;
+            if (in.peek() == JsonToken.NAME) {
+                key = in.nextName();
+            } else {
+                key = in.nextString();
+            }
 
-			if (result.put(key, value) != null) {
-				throw new JsonSyntaxException("duplicate key: " + key);
-			}
-		}
-		in.endObject();
+            final Object value;
 
-		return result;
-	}
+            Type valueType = result.getReflectiveMappingTypes().get(key);
+            if (valueType != null) {
+                value = gson.getAdapter(TypeToken.get(valueType)).read(in);
+            } else {
+                if (in.peek() == JsonToken.BEGIN_OBJECT) {
+                    value = gson.getAdapter(MailChimpObject.class).read(in);
+                } else if(in.peek() == JsonToken.BEGIN_ARRAY) {
+                    value = readList(in);
+                } else {
+                    value = gson.getAdapter(Object.class).read(in);
+                }
+            }
 
-	private List<?> readList(JsonReader in) throws IOException {
-		List<Object> result = new ArrayList<Object>();
-		in.beginArray();
-		while(in.peek() != JsonToken.END_ARRAY) {
-			final Object element;
+            if (result.put(key, value) != null) {
+                throw new JsonSyntaxException("duplicate key: " + key);
+            }
+        }
+        in.endObject();
 
-			if (in.peek() == JsonToken.BEGIN_OBJECT) {
-				element = gson.getAdapter(MailChimpObject.class).read(in);
-			} else if(in.peek() == JsonToken.BEGIN_ARRAY) {
-				element = readList(in);
-			} else {
-				element = gson.getAdapter(Object.class).read(in);
-			}
+        return result;
+    }
 
-			result.add(element);
-		}
-		in.endArray();
-		return result;
-	}
+    private List<?> readList(JsonReader in) throws IOException {
+        List<Object> result = new ArrayList<Object>();
+        in.beginArray();
+        while(in.peek() != JsonToken.END_ARRAY) {
+            final Object element;
+
+            if (in.peek() == JsonToken.BEGIN_OBJECT) {
+                element = gson.getAdapter(MailChimpObject.class).read(in);
+            } else if(in.peek() == JsonToken.BEGIN_ARRAY) {
+                element = readList(in);
+            } else {
+                element = gson.getAdapter(Object.class).read(in);
+            }
+
+            result.add(element);
+        }
+        in.endArray();
+        return result;
+    }
 }
