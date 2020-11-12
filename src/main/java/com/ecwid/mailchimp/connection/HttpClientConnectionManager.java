@@ -16,11 +16,12 @@
 package com.ecwid.mailchimp.connection;
 
 import java.io.IOException;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
@@ -52,8 +53,33 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 	 * @param readTimeout the timeout (in milliseconds) when when waiting for the response from the remote server
 	 */
 	public HttpClientConnectionManager(int connectTimeout, int readTimeout) {
+		this(connectTimeout, readTimeout, null, 0);
+	}
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param proxyUrl the proxy url that should be used when trying to connect to server
+	 * @param proxyPort the proxy port
+	 */
+	public HttpClientConnectionManager(String proxyUrl, int proxyPort) {
+		this(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT, proxyUrl, proxyPort);
+	}
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param connectTimeout the timeout (in milliseconds) when trying to connect to the remote server
+	 * @param readTimeout the timeout (in milliseconds) when when waiting for the response from the remote server
+	 * @param proxyUrl the proxy url that should be used when trying to connect to server
+	 * @param proxyPort the proxy port
+	 */
+	public HttpClientConnectionManager(int connectTimeout, int readTimeout, String proxyUrl, int proxyPort) {
 		setConnectTimeout(connectTimeout);
 		setReadTimeout(readTimeout);
+		if (proxyUrl != null && proxyPort != 0) {
+			setProxy(new HttpHost(proxyUrl, proxyPort));
+		}
 	}
 
 	@Override
@@ -77,7 +103,7 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 		return HttpConnectionParams.getConnectionTimeout(http.getParams());
 	}
 
-	public void setConnectTimeout(int connectTimeout) {
+	public final void setConnectTimeout(int connectTimeout) {
 		HttpConnectionParams.setConnectionTimeout(http.getParams(), connectTimeout);
 	}
 
@@ -85,7 +111,15 @@ public class HttpClientConnectionManager implements MailChimpConnectionManager {
 		return HttpConnectionParams.getSoTimeout(http.getParams());
 	}
 
-	public void setReadTimeout(int readTimeout) {
+	public final void setReadTimeout(int readTimeout) {
 		HttpConnectionParams.setSoTimeout(http.getParams(), readTimeout);
+	}
+	
+	public HttpHost getProxy() {
+		return (HttpHost) http.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY);
+	}
+	
+	public final void setProxy(HttpHost proxy) {
+		http.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 	}
 }

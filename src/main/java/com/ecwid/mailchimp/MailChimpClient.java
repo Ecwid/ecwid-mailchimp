@@ -46,6 +46,17 @@ public class MailChimpClient implements Closeable {
 	public MailChimpClient() {
 		this(new HttpClientConnectionManager());
 	}
+	
+	/**
+	 * Constructs a {@code MailChimpClient} object accessing MailChimp API service point
+	 * through the default connection manager (currently {@link HttpClientConnectionManager})
+	 * and proxy.
+	 * @param proxyUrl the proxy url that should be used when trying to connect to server
+	 * @param proxyPort the proxy port
+	 */
+	public MailChimpClient(String proxyUrl, int proxyPort) {
+		this(new HttpClientConnectionManager(proxyUrl, proxyPort));
+	} 
 
 	/**
 	 * Constructs a {@code MailChimpClient} object accessing MailChimp API service point
